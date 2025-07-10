@@ -156,6 +156,7 @@
     <ClInclude Include="Ellipse.h" />
     <ClInclude Include="Gradient.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="Path.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="PolyLine.h" />
     <ClInclude Include="PolyShape.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="Gradient.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Path.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="PolyLine.cpp" />
     <ClCompile Include="PolyShape.cpp" />
