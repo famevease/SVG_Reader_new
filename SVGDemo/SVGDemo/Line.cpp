@@ -6,7 +6,7 @@ using namespace std;
 Line::Line(const Vector2Df& point1, const Vector2Df& point2, ColorShape stroke, float stroke_width): 
 	SVGElement(ColorShape::Transparent, stroke, stroke_width, point1), direction(point2) {}
 
-string Line::getShape() const {
+string Line::getClass() const {
 	return "Line";
 }
 

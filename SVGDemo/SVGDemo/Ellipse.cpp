@@ -3,7 +3,7 @@
 
 Ellipse::Ellipse(const Vector2Df& radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_thickness): SVGElement(fill, stroke, stroke_thickness, center), radius(radius) {}
 
-std::string Ellipse::getShape() const { 
+std::string Ellipse::getClass() const { 
     return "Ellipse"; 
 }
 

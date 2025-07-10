@@ -26,6 +26,6 @@ public:
      * @return The string "Polygon".
 
      */
-    std::string getShape() const override;
+    std::string getClass() const override;
 };
 

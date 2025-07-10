@@ -35,7 +35,7 @@ public:
      *
      * @return The string "Rect".
      */
-    std::string getShape() const override;
+    std::string getClass() const override;
 
     /**
      * @brief Sets the width of the rectangle.

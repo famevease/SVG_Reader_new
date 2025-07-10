@@ -29,6 +29,6 @@ public:
      * @return The string "Circle".
      *
      */
-    std::string getShape() const override;
+    std::string getClass() const override;
 };
 

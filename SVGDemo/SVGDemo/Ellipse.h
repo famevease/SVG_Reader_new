@@ -33,7 +33,7 @@ public:
      *
      * @note This function is used for determining the type of the shape.
      */
-    std::string getShape() const override;
+    std::string getClass() const override;
 
     /**
      * @brief Sets the radius of the ellipse.

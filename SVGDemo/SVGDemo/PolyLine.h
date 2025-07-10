@@ -25,6 +25,6 @@ public:
      *
      * @return The string "Polyline".
      */
-    std::string getShape() const override;
+    std::string getClass() const override;
 };
 

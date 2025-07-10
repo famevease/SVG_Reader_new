@@ -30,7 +30,7 @@ public:
      * @note This function is pure virtual and must be implemented by derived
      * classes.
      */
-    virtual std::string getShape() const = 0;
+    virtual std::string getClass() const = 0;
 
     /**
      * @brief Adds a vertex to the shape.

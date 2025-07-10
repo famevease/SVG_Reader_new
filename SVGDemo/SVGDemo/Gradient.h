@@ -1,13 +1,6 @@
 #pragma once
-class Gradient
-{
-};
 
-#ifndef GRADIENT_HPP_
-#define GRADIENT_HPP_
-
-#include <string>
-#include <vector>
+#include "stdafx.h"
 
 #include "Stop.hpp"
 #include "Vector2D.hpp"
@@ -103,5 +96,3 @@ public:
 
 
 };
-
-#endif

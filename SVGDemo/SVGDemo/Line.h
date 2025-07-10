@@ -16,7 +16,7 @@ public:
 	* stroke_with: đồ dày (mặc định là 1.0)
 	*/
 	Line(const Vector2Df& point1, const Vector2Df& point2, ColorShape stroke, float stroke_with);
-	string getShape() const override; //trả về loại shape
+	string getClass() const override; //trả về loại shape
 	void setDirection(const Vector2Df& direction); 
 	Vector2Df getDirection() const;
 	float getLength() const; // Trả về chiều dài
