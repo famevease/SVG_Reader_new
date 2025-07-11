@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 
-#include "Stop.hpp"
+#include "Stop.h"
 #include "Vector2D.hpp"
 
 /**
