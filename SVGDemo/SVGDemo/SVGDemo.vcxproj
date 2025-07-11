@@ -167,6 +167,7 @@
     <ClInclude Include="SVGDemo.h" />
     <ClInclude Include="SVGElement.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Vector2D.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +189,7 @@
     </ClCompile>
     <ClCompile Include="SVGDemo.cpp" />
     <ClCompile Include="SVGElement.cpp" />
+    <ClCompile Include="Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SVGDemo.rc" />
