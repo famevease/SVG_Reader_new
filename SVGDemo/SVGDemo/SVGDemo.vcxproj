@@ -156,10 +156,12 @@
     <ClInclude Include="Ellipse.h" />
     <ClInclude Include="Gradient.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="LinearGradient.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="PolyLine.h" />
     <ClInclude Include="PolyShape.h" />
+    <ClInclude Include="RadialGradient.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="resource.h" />
@@ -177,10 +179,12 @@
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="Gradient.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="LinearGradient.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="PolyLine.cpp" />
     <ClCompile Include="PolyShape.cpp" />
+    <ClCompile Include="RadialGradient.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
