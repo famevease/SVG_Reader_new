@@ -1,26 +1,38 @@
-﻿#ifndef ColorShape_h_
-#define ColorShape_h_
+﻿#ifndef COLOR_SHAPE_H
+#define COLOR_SHAPE_H
 
-class ColorShape{
+#include <gdiplus.h>
+#include <iostream>
+#pragma comment(lib, "gdiplus.lib")
+
+class ColorShape
+{
 public:
-	float r = 0, g = 0, b = 0, opacity = 1; // cường độ đỏ, xanh lá, xanh dương, độ trong suốt
-	ColorShape() {}
-	ColorShape(float r, float g, float b, float o): r(r), g(g), b(b), opacity(o){}
-};
+	static const ColorShape Black;
+	static const ColorShape White;
+	static const ColorShape Red;
+	static const ColorShape Green;
+	static const ColorShape Blue;
+	static const ColorShape Yellow;
+	static const ColorShape Magenta;
+	static const ColorShape Cyan;
+	static const ColorShape Transparent;
 
-class stroke {
+	ColorShape();
+	ColorShape(BYTE red, BYTE green, BYTE blue, BYTE alpha = 255);
+	ColorShape(const Gdiplus::Color& color);
+
+	BYTE getR() const;
+	BYTE getG() const;
+	BYTE getB() const;
+	BYTE getA() const;
+
+	Gdiplus::Color toGDIColor() const;
+
+	friend std::ostream& operator<<(std::ostream& os, const ColorShape& color);
+
 private:
-	ColorShape strokeColor;
-	float strokeWidth;
-public:
-	stroke();
-	~stroke();
-
-	ColorShape getStrokeColor();
-	float getStrokeWidth();
-
-	void setStrokeColor(ColorShape);
-	void setStrokeWidth(float);
+	Gdiplus::Color color;
 };
 
-#endif
+#endif // COLOR_SHAPE_H
