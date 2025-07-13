@@ -1,0 +1,15 @@
+#pragma once
+
+#include "Circle.h"
+#include "Ellipse.h"
+#include "ColorShape.h"
+#include "Group.h"
+#include "LinearGradient.h"
+#include "Path.h"
+#include "Polygon.h"
+#include "Polyline.h"
+#include "RadialGradient.h"
+#include "Rectangle.h"
+#include "Text.h"
+#include "ViewBox.h"
+#include "Line.h"

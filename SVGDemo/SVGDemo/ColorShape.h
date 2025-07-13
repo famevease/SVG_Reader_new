@@ -20,7 +20,7 @@ public:
 
 	ColorShape();
 	ColorShape(BYTE red, BYTE green, BYTE blue, BYTE alpha = 255);
-	ColorShape(const Gdiplus::Color &color);
+	ColorShape(const Gdiplus::Color& color);
 
 	BYTE getR() const;
 	BYTE getG() const;
@@ -29,7 +29,7 @@ public:
 
 	Gdiplus::Color toGDIColor() const;
 
-	friend std::ostream &operator<<(std::ostream &os, const ColorShape &color);
+	friend std::ostream& operator<<(std::ostream& os, const ColorShape& color);
 
 private:
 	Gdiplus::Color color;
