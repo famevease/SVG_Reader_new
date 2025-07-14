@@ -457,10 +457,12 @@ ColorShape Parser::parseColor(rapidxml::xml_node<>* node, std::string name,
             }
             result = color_code->second;
         }
+        float alpha = result.getA() / 255.0f;
+        
         if (name == "stop-color")
-            result.a = result.a * getFloatAttribute(node, "stop-opacity");
+            alpha *= getFloatAttribute(node, "stop-opacity");
         else
-            result.a = result.a * getFloatAttribute(node, name + "-opacity") *
+            alpha *= getFloatAttribute(node, name + "-opacity") *
             getFloatAttribute(node, "opacity");
         return result;
     }

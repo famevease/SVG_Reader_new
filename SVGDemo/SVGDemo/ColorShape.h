@@ -1,10 +1,9 @@
 ﻿#ifndef COLOR_SHAPE_H
 #define COLOR_SHAPE_H
 
-#include <gdiplus.h>
+#include "GdiHelper.h"
 #include <iostream>
 #include <map>
-#pragma comment(lib, "gdiplus.lib")
 
 class ColorShape
 {

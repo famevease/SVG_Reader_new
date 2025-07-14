@@ -1,7 +1,6 @@
 #pragma once
 
-#include "stdafx.h"
-
+#include "GdiHelper.h"
 #include "Stop.h"
 #include "Vector2D.hpp"
 

@@ -1,6 +1,7 @@
 ﻿#ifndef Line_h_
 #define Line_h_
 
+#include "GdiHelper.h"
 #include "SVGElement.h"
 /*
 * Lớp Line kế thừa SVGElement thể hiện một đoạn đường có hướng và độ dày xác định

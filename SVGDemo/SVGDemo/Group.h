@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-
+#include "GdiHelper.h"
 #include "SVGElement.h"
 
 typedef std::vector< std::pair< std::string, std::string > >

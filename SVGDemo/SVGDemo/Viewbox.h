@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GdiHelper.h"
+
 /**
  * @brief A ViewBox is a rectangle that defines the area of the SVG canvas that
  * should be visible to the user.

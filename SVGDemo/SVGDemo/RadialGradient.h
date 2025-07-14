@@ -1,5 +1,6 @@
 #pragma once
 
+#include "GdiHelper.h"
 #include "Gradient.h"
 
 /**
