@@ -54,7 +54,7 @@ namespace {
     auto getRgbColor = [](std::string color) -> ColorShape {
         int r, g, b;
         float a = 1;
-        sscanf(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
+        sscanf_s(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
         return ColorShape(r, g, b, 255 * a);
         };
 
@@ -500,15 +500,19 @@ void Parser::GetGradients(rapidxml::xml_node<>* node) {
     while (gradient_node) {
         if (std::string(gradient_node->name()).find("Gradient") !=
             std::string::npos) {
-            Gradient* gradient;
+
+            Gradient* gradient = nullptr;
+
             std::string id = getAttribute(gradient_node, "id");
             std::string units = getAttribute(gradient_node, "gradientUnits");
             std::vector< Stop > stops = getGradientStops(gradient_node);
             std::string href = getAttribute(gradient_node, "xlink:href");
+            
             int pos = href.find("#");
             if (pos != std::string::npos) {
                 href = href.substr(pos + 1);
             }
+
             if (std::string(gradient_node->name()).find("linear") !=
                 std::string::npos) {
                 float x1 = getFloatAttribute(gradient_node, "x1");
@@ -534,6 +538,7 @@ void Parser::GetGradients(rapidxml::xml_node<>* node) {
                 if (this->gradients.find(id) == this->gradients.end())
                     this->gradients[id] = gradient;
             }
+            
             if (href != "") {
                 for (auto stop : parseGradient(href)->getStops()) {
                     gradient->addStop(stop);
