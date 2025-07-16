@@ -90,25 +90,25 @@ void Renderer::draw(Gdiplus::Graphics& graphics, Group* group) const {
             Group* group = dynamic_cast< Group* >(shape);
             draw(graphics, group);
         } else if (shape->getClass() == "Polyline") {
-            Plyline* polyline = dynamic_cast< Plyline* >(shape);
+            PolyLine* polyline = dynamic_cast< PolyLine* >(shape);
             drawPolyline(graphics, polyline);
         } else if (shape->getClass() == "Text") {
             Text* text = dynamic_cast< Text* >(shape);
             drawText(graphics, text);
-        } else if (shape->getClass() == "Rect") {
-            Rect* rectangle = dynamic_cast< Rect* >(shape);
+        } else if (shape->getClass() == "Rectangle") {
+            Rectangle* rectangle = dynamic_cast< Rectangle* >(shape);
             drawRectangle(graphics, rectangle);
         } else if (shape->getClass() == "Circle") {
             Circle* circle = dynamic_cast< Circle* >(shape);
             drawCircle(graphics, circle);
         } else if (shape->getClass() == "Ellipse") {
-            Ell* ellipse = dynamic_cast< Ell* >(shape);
+            Ellipse* ellipse = dynamic_cast< Ellipse* >(shape);
             drawEllipse(graphics, ellipse);
         } else if (shape->getClass() == "Line") {
             Line* line = dynamic_cast< Line* >(shape);
             drawLine(graphics, line);
         } else if (shape->getClass() == "Polygon") {
-            Plygon* polygon = dynamic_cast< Plygon* >(shape);
+            Polygon* polygon = dynamic_cast< Polygon* >(shape);
             drawPolygon(graphics, polygon);
         } else if (shape->getClass() == "Path") {
             Path* path = dynamic_cast< Path* >(shape);
@@ -132,7 +132,7 @@ void Renderer::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
 
 // Draw a rectangle on the given graphics context
 void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
-                             Rect* rectangle) const {
+                             Rectangle* rectangle) const {
     float x = rectangle->getPosition().x;
     float y = rectangle->getPosition().y;
     float width = rectangle->getWidth();
@@ -228,7 +228,7 @@ void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
 }
 
 // Draw an ellipse on the given graphics context
-void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
+void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ellipse* ellipse) const {
     ColorShape outline_color = ellipse->getOutlineColor();
 
     Gdiplus::Pen ellipse_outline(
@@ -316,7 +316,7 @@ void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
 
 // Draw a polyline on the given graphics context
 void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
-                            Plyline* polyline) const {
+                            Polyline* polyline) const {
     ColorShape outline_color = polyline->getOutlineColor();
     Gdiplus::Pen polyline_outline(
         Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
