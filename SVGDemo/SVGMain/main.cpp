@@ -6,7 +6,7 @@
 
 // clang-format on
 
-#include "Parser.hpp"
+#include "Parser.h"
 #include "Viewer.hpp"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

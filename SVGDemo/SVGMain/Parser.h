@@ -10,7 +10,7 @@
 #include <vector>
 #include <map>
 
-#include "rapidxml.hpp"
+#include "../external/rapidxml/rapidxml.hpp"
 #include "Graphics.hpp"
 
 typedef std::vector< std::pair< std::string, std::string > > Attributes;
