@@ -75,7 +75,7 @@ private:
      * @param graphics The Gdiplus::Graphics context for drawing.
      * @param rectangle The Rect object representing the rectangle to be drawn.
      */
-    void drawRectangle(Gdiplus::Graphics& graphics, Rectangle* rectangle) const;
+    void drawRectangle(Gdiplus::Graphics& graphics, MyRectangle* rectangle) const;
 
     /**
      * @brief Draws a circle shape using Gdiplus::Graphics.
@@ -91,7 +91,7 @@ private:
      * @param graphics The Gdiplus::Graphics context for drawing.
      * @param ellipse The Ell object representing the ellipse to be drawn.
      */
-    void drawEllipse(Gdiplus::Graphics& graphics, Ellipse* ellipse) const;
+    void drawEllipse(Gdiplus::Graphics& graphics, MyEllipse* ellipse) const;
 
     /**
      * @brief Draws a polygon shape using Gdiplus::Graphics.
@@ -99,7 +99,7 @@ private:
      * @param graphics The Gdiplus::Graphics context for drawing.
      * @param polygon The Plygon object representing the polygon to be drawn.
      */
-    void drawPolygon(Gdiplus::Graphics& graphics, Polygon* polygon) const;
+    void drawPolygon(Gdiplus::Graphics& graphics, MyPolygon* polygon) const;
 
     /**
      * @brief Draws text using Gdiplus::Graphics.
@@ -115,7 +115,7 @@ private:
      * @param graphics The Gdiplus::Graphics context for drawing.
      * @param polyline The Plyline object representing the polyline to be drawn.
      */
-    void drawPolyline(Gdiplus::Graphics& graphics, Polyline* polyline) const;
+    void drawPolyline(Gdiplus::Graphics& graphics, MyPolyLine* polyline) const;
 
     /**
      * @brief Draws a path shape using Gdiplus::Graphics.
