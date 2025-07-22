@@ -1,33 +1,33 @@
 #include "stdafx.h"
 #include "Rectangle.h"
 
-Rectangle::Rectangle(float width, float height, Vector2Df position, Vector2Df radius, const ColorShape& fill, const ColorShape& stroke, float stroke_width): SVGElement(fill, stroke, stroke_width, position), width(width), height(height), radius(radius) {}
+MyRectangle::MyRectangle(float width, float height, Vector2Df position, Vector2Df radius, const ColorShape& fill, const ColorShape& stroke, float stroke_width): SVGElement(fill, stroke, stroke_width, position), width(width), height(height), radius(radius) {}
 
-std::string Rectangle::getClass() const { 
+std::string MyRectangle::getClass() const { 
 	return "Rect"; 
 }
 
-void Rectangle::setWidth(float width) { 
+void MyRectangle::setWidth(float width) { 
 	this->width = width; 
 }
 
-float Rectangle::getWidth() const { 
+float MyRectangle::getWidth() const { 
 	return width; 
 }
 
-void Rectangle::setHeight(float height) { 
+void MyRectangle::setHeight(float height) { 
 	this->height = height; 
 }
 
-float Rectangle::getHeight() const { 
+float MyRectangle::getHeight() const { 
 	return height; 
 }
 
-void Rectangle::setRadius(const Vector2Df& radius) { 
+void MyRectangle::setRadius(const Vector2Df& radius) { 
 	this->radius = radius; 
 }
 
-Vector2Df Rectangle::getRadius() const { 
+Vector2Df MyRectangle::getRadius() const { 
 	return radius; 
 }
 
