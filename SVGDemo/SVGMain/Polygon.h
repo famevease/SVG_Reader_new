@@ -9,7 +9,7 @@
  * The Polygon class is derived from the PolyShape class and defines a polygon
  * with a variable number of vertices.
  */
-class Polygon : public PolyShape
+class MyPolygon : public PolyShape
 {
 public:
     /**
@@ -19,7 +19,7 @@ public:
      * @param stroke Outline color of the polygon (default is sf::Color::White).
      * @param stroke_width Thickness of the polygon outline (default is 0).
      */
-    Polygon(ColorShape fill, ColorShape stroke, float stroke_width);
+    MyPolygon(ColorShape fill, ColorShape stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

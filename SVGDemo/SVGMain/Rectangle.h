@@ -10,7 +10,7 @@
  * with a specified width, height, position, fill color, stroke color, and
  * stroke thickness.
  */
-class Rectangle : public SVGElement
+class MyRectangle : public SVGElement
 {
 private:
     float width;       ///< Width of the rectangle
@@ -29,7 +29,7 @@ public:
      * @param stroke Outline color of the rectangle.
      * @param stroke_width Thickness of the rectangle outline.
      */
-    Rectangle(float width, float height, Vector2Df position, Vector2Df radius, const ColorShape& fill, const ColorShape& stroke, float stroke_width);
+    MyRectangle(float width, float height, Vector2Df position, Vector2Df radius, const ColorShape& fill, const ColorShape& stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

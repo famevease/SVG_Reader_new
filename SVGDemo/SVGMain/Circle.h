@@ -9,7 +9,7 @@
  * with a specified radius, center, fill color, stroke color, and stroke
  * thickness.
  */
-class Circle : public Ellipse
+class Circle : public MyEllipse
 {
 public:
     /**

@@ -9,7 +9,7 @@
  * with a variable radius in the x and y directions.
  */
 
-class Ellipse : public SVGElement
+class MyEllipse : public SVGElement
 {
 private:
     Vector2Df radius;  ///< Radius of the ellipse in the x and y directions
@@ -24,7 +24,7 @@ public:
      * @param stroke Outline color of the ellipse.
      * @param stroke_width Thickness of the ellipse outline.
      */
-    Ellipse(const Vector2Df& radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_width);
+    MyEllipse(const Vector2Df& radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

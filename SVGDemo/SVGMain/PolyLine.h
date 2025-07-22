@@ -9,7 +9,7 @@
  * The Polyline class is derived from the PolyShape class and defines a polyline
  * with a variable number of vertices.
  */
-class PolyLine : public PolyShape
+class MyPolyLine : public PolyShape
 {
 public:
     /**
@@ -19,7 +19,7 @@ public:
      * @param stroke The stroke color of the polyline (default is sf::Color::White).
      * @param fill The fill color of the polyline (default is sf::Color::Transparent).
      */
-    PolyLine(const ColorShape& fill, const ColorShape& stroke, float stroke_width);
+    MyPolyLine(const ColorShape& fill, const ColorShape& stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.
