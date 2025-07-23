@@ -73,7 +73,7 @@ public:
      *
      * @note This function is used for debugging purposes.
      */
-   /* void printData() const override;*/
+    void printData() const override;
 
 private:
     std::vector< SVGElement* > shapes;  ///< Vector of shapes in the group

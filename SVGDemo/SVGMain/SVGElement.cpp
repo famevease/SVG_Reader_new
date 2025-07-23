@@ -52,25 +52,25 @@ Vector2Df SVGElement::getMaxBound() const {
     return Vector2Df(); 
 }
 
-//void SVGElement::printData() const {
-//    std::cout << "Shape: " << getShape() << std::endl;
-//    std::cout << "Fill: " << getFillColor() << std::endl;
-//    std::cout << "Stroke: " << getOutlineColor() << std::endl;
-//    std::cout << "Stroke width: " << getOutlineThickness() << std::endl;
-//    std::cout << "Position: " << getPosition().x << " " << getPosition().y
-//        << std::endl;
-//    std::cout << "Transforms: ";
-//    for (auto transform : transforms) {
-//        std::cout << transform << " ";
-//    }
-//    std::cout << std::endl;
-//    if (gradient != NULL)
-//        std::cout << "Gradient: " << gradient->getClass() << " "
-//        << gradient->getPoints().first.x << " "
-//        << gradient->getPoints().first.y << " "
-//        << gradient->getPoints().second.x << " "
-//        << gradient->getPoints().second.y << std::endl;
-//}
+void SVGElement::printData() const {
+   std::cout << "Shape: " << getShape() << std::endl;
+   std::cout << "Fill: " << getFillColor() << std::endl;
+   std::cout << "Stroke: " << getOutlineColor() << std::endl;
+   std::cout << "Stroke width: " << getOutlineThickness() << std::endl;
+   std::cout << "Position: " << getPosition().x << " " << getPosition().y
+       << std::endl;
+   std::cout << "Transforms: ";
+   for (auto transform : transforms) {
+       std::cout << transform << " ";
+   }
+   std::cout << std::endl;
+   if (gradient != NULL)
+       std::cout << "Gradient: " << gradient->getClass() << " "
+       << gradient->getPoints().first.x << " "
+       << gradient->getPoints().first.y << " "
+       << gradient->getPoints().second.x << " "
+       << gradient->getPoints().second.y << std::endl;
+}
 
 void SVGElement::setTransforms(const std::vector< std::string >& transforms) {
     this->transforms = transforms;
