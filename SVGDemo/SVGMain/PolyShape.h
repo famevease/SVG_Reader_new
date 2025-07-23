@@ -9,7 +9,7 @@
  * The PolyShape class is derived from the SVGElement class and defines a common
  * interface for polyline and polygon shapes.
  */
-class PolyShape : public SVGElement
+class MyPolyShape : public SVGElement
 {
 protected:
     std::vector< Vector2Df > points;  ///< Vertices of the polyshape
@@ -22,7 +22,7 @@ protected:
      * @param stroke Outline color of the polyshape (default is sf::Color::White).
      * @param stroke_width Thickness of the polyshape outline (default is 0).
      */
-    PolyShape(const ColorShape& fill, const ColorShape& stroke, float stroke_width);
+    MyPolyShape(const ColorShape& fill, const ColorShape& stroke, float stroke_width);
 
 public:
     /**

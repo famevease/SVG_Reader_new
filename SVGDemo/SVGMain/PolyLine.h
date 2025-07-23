@@ -9,7 +9,7 @@
  * The Polyline class is derived from the PolyShape class and defines a polyline
  * with a variable number of vertices.
  */
-class MyPolyLine : public PolyShape
+class MyPolyLine : public MyPolyShape
 {
 public:
     /**

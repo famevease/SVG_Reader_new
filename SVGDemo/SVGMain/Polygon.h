@@ -9,7 +9,7 @@
  * The Polygon class is derived from the PolyShape class and defines a polygon
  * with a variable number of vertices.
  */
-class MyPolygon : public PolyShape
+class MyPolygon : public MyPolyShape
 {
 public:
     /**

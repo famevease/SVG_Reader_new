@@ -1,25 +1,25 @@
 #include "stdafx.h"
 #include "PolyShape.h"
 
-PolyShape::PolyShape(const ColorShape& fill, const ColorShape& stroke, float stroke_width): SVGElement(fill, stroke, stroke_width) {}
+MyPolyShape::MyPolyShape(const ColorShape& fill, const ColorShape& stroke, float stroke_width): SVGElement(fill, stroke, stroke_width) {}
 
-void PolyShape::addPoint(const Vector2Df& point) { 
+void MyPolyShape::addPoint(const Vector2Df& point) { 
     points.push_back(point); 
 }
 
-const std::vector< Vector2Df >& PolyShape::getPoints() const { 
+const std::vector< Vector2Df >& MyPolyShape::getPoints() const { 
     return points; 
 }
 
-void PolyShape::setFillRule(std::string fill_rule) {
+void MyPolyShape::setFillRule(std::string fill_rule) {
     this->fill_rule = fill_rule;
 }
 
-std::string PolyShape::getFillRule() const { 
+std::string MyPolyShape::getFillRule() const { 
     return fill_rule; 
 }
 
-Vector2Df PolyShape::getMinBound() const {
+Vector2Df MyPolyShape::getMinBound() const {
     float min_x = points[0].x;
     float min_y = points[0].y;
     for (auto& point : points) {
@@ -29,7 +29,7 @@ Vector2Df PolyShape::getMinBound() const {
     return Vector2Df(min_x, min_y);
 }
 
-Vector2Df PolyShape::getMaxBound() const {
+Vector2Df MyPolyShape::getMaxBound() const {
     float max_x = points[0].x;
     float max_y = points[0].y;
     for (auto& point : points) {
