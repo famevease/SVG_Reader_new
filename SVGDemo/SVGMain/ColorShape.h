@@ -19,23 +19,15 @@ public:
 	static const ColorShape Transparent;
 
 	ColorShape();
-	// ColorShape(BYTE r, BYTE g, BYTE b, BYTE a = 255);
-	// ColorShape(const Gdiplus::Color &color);
+	ColorShape(BYTE r, BYTE g, BYTE b, BYTE a = 255);
+	ColorShape(const Gdiplus::Color &color);
 
-	ColorShape(int red, int green, int blue, int alpha = 255);
-	explicit ColorShape(int color);
+	BYTE getR() const;
+	BYTE getG() const;
+	BYTE getB() const;
+	BYTE getA() const;
 
-	// BYTE getR() const;
-	// BYTE getG() const;
-	// BYTE getB() const;
-	// BYTE getA() const;
-
-	int r;  ///< Red component
-	int g;  ///< Green component
-	int b;  ///< Blue component
-	int a;  ///< Alpha (opacity) component
-
-	// Gdiplus::Color toGDIColor() const;
+	Gdiplus::Color toGDIColor() const;
 
 	friend std::ostream &operator<<(std::ostream &os, const ColorShape &color);
 
