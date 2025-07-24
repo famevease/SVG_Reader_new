@@ -4,6 +4,7 @@
 #include <gdiplus.h>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 #include "SVGElement.h"
 #include "TransformUtils.h"
