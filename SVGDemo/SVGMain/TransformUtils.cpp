@@ -39,8 +39,8 @@ std::pair< float, float > TransformUtils::getScaleXY(std::string transform_value
 }
 
 // Apply transformations based on the specified order
-void TransformUtils::applyTransform(std::vector<std::string> transform_order,
-                                    Gdiplus::Graphics& graphics) cosnt {
+void TransformUtils::applyTransform(const std::vector<std::string> transform_order,
+                                    Gdiplus::Graphics& graphics) {
     for (auto type : transform_order) {
         if (type.find("translate") != std::string::npos) {
             float trans_x = getTranslate(type).first,

@@ -4,10 +4,11 @@
 #include <gdiplus.h>
 #include <vector>
 #include <string>
+
 #include "SVGElement.h"
 #include "TransformUtils.h"
-//#include "LinearGradient.h"
-//#include "RadialGradient.h"
+#include "LinearGradient.h"
+#include "RadialGradient.h"
 
 class BrushUtils {
 private:
@@ -19,8 +20,8 @@ private:
      * applied.
      * @param brush The Gdiplus::LinearGradientBrush object for the shape fill.
      */
-    void applyTransformsOnBrush(std::vector<std::string> transform_order, 
-                                Gdiplus::LinearGradientBrush*& brush) const;
+    static void applyTransformsOnLinearBrush(const std::vector<std::string>& transform_order, 
+                                Gdiplus::LinearGradientBrush*& brush);
 
     /**
      * @brief Utility function to apply a series of transformations to the brush
@@ -31,8 +32,8 @@ private:
      * @param brush The Gdiplus::PathGradientBrush object for the shape fill.
      *
      */
-    void applyTransformsOnBrush(std::vector<std::string>& transform_order,
-                                 Gdiplus::PathGradientBrush*& brush) const;
+    static void applyTransformsOnRadialBrush(const std::vector<std::string>& transform_order,
+                                 Gdiplus::PathGradientBrush*& brush);
 
     /**
      * @brief Gets the Gdiplus::brush object for the shape fill.

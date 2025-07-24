@@ -1,27 +1,27 @@
 #include "BrushUtils.h"
 
 // Apply transformation matrix operations on a linear gradient brush
-void BrushUtils::applyTransformsOnBrush(
-    std::vector<std::string> transform_order,
-    Gdiplus::LinearGradientBrush*& brush) const {
+void BrushUtils::applyTransformsOnLinearBrush(const 
+    std::vector<std::string>& transform_order,
+    Gdiplus::LinearGradientBrush*& brush) {
     for (auto type : transform_order) {
         if (type.find("translate") != std::string::npos) {
             // Apply translation transformation
-            float trans_x = getTranslate(type).first,
-                  trans_y = getTranslate(type).second;
+            float trans_x = TransformUtils::getTranslate(type).first,
+                  trans_y = TransformUtils::getTranslate(type).second;
             brush->TranslateTransform(trans_x, trans_y);
         } else if (type.find("rotate") != std::string::npos) {
             // Apply rotation transformation
-            float degree = getRotate(type);
+            float degree = TransformUtils::getRotate(type);
             brush->RotateTransform(degree);
         } else if (type.find("scale") != std::string::npos) {
             // Apply scaling transformation
             if (type.find(",") != std::string::npos) {
-                float scale_x = getScaleXY(type).first,
-                      scale_y = getScaleXY(type).second;
+                float scale_x = TransformUtils::getScaleXY(type).first,
+                      scale_y = TransformUtils::getScaleXY(type).second;
                 brush->ScaleTransform(scale_x, scale_y);
             } else {
-                float scale = getScale(type);
+                float scale = TransformUtils::getScale(type);
                 brush->ScaleTransform(scale, scale);
             }
         } else if (type.find("matrix") != std::string::npos) {
@@ -40,24 +40,24 @@ void BrushUtils::applyTransformsOnBrush(
 }
 
 // Apply transformation matrix operations on a path gradient brush
-void BrushUtils::applyTransformsOnBrush(
-    std::vector< std::string > transform_order,
-    Gdiplus::PathGradientBrush*& brush) const {
+void BrushUtils::applyTransformsOnRadialBrush(const 
+    std::vector< std::string >& transform_order,
+    Gdiplus::PathGradientBrush*& brush) {
     for (auto type : transform_order) {
         if (type.find("translate") != std::string::npos) {
-            float trans_x = getTranslate(type).first,
-                  trans_y = getTranslate(type).second;
+            float trans_x = TransformUtils::getTranslate(type).first,
+                  trans_y = TransformUtils::getTranslate(type).second;
             brush->TranslateTransform(trans_x, trans_y);
         } else if (type.find("rotate") != std::string::npos) {
-            float degree = getRotate(type);
+            float degree = TransformUtils::getRotate(type);
             brush->RotateTransform(degree);
         } else if (type.find("scale") != std::string::npos) {
             if (type.find(",") != std::string::npos) {
-                float scale_x = getScaleXY(type).first,
-                      scale_y = getScaleXY(type).second;
+                float scale_x = TransformUtils::getScaleXY(type).first,
+                      scale_y = TransformUtils::getScaleXY(type).second;
                 brush->ScaleTransform(scale_x, scale_y);
             } else {
-                float scale = getScale(type);
+                float scale = TransformUtils::getScale(type);
                 brush->ScaleTransform(scale, scale);
             }
         } else if (type.find("matrix") != std::string::npos) {
@@ -123,12 +123,14 @@ Gdiplus::Brush* BrushUtils::getBrush(SVGElement* shape,
                     colors[0], colors[stop_size - 1]);
             fill->SetWrapMode(Gdiplus::WrapModeTileFlipX);
             fill->SetInterpolationColors(colors, offsets, stop_size);
-            applyTransformsOnBrush(gradient->getTransforms(), fill);
+            applyTransformsOnLinearBrush(gradient->getTransforms(), fill);
 
             delete[] colors;
             delete[] offsets;
             return fill;
-        } else if (gradient->getClass() == "RadialGradient") {
+        } 
+        
+        else if (gradient->getClass() == "RadialGradient") {
             // Brush radiol gradient
             RadialGradient* radial_gradient =
                 dynamic_cast< RadialGradient* >(gradient);
@@ -169,7 +171,7 @@ Gdiplus::Brush* BrushUtils::getBrush(SVGElement* shape,
             }
 
             fill->SetInterpolationColors(colors, offsets, stop_size);
-            applyTransformsOnBrush(gradient->getTransforms(), fill);
+            applyTransformsOnRadialBrush(gradient->getTransforms(), fill);
             delete[] colors;
             delete[] offsets;
             return fill;
