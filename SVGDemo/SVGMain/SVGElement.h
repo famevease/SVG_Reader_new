@@ -1,7 +1,7 @@
 #ifndef SVGELEMENT_H
 #define SVGELEMENT_H
 
-#include "stdafx.h"
+#include "graphics/stdafx.h"
 
 #include "ColorShape.h"
 #include "Gradient.h"

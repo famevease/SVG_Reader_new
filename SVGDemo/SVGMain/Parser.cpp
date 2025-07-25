@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "graphics/stdafx.h"
 #include "Parser.h"
 
 Parser* Parser::instance = nullptr;
