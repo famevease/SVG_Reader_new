@@ -123,7 +123,7 @@ void Renderer::draw(Gdiplus::Graphics& graphics, Group* group) const {
 void Renderer::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
     // Extract color and thickness information from the Line object
     ColorShape color = line->getOutlineColor();
-    Gdiplus::Pen linePen(Gdiplus::Color(color.a, color.r, color.g, color.b),
+    Gdiplus::Pen linePen(color.toGDIColor(),
                          line->getOutlineThickness());
     // Extract start and end points from the Line object
     Gdiplus::PointF startPoint(line->getPosition().x, line->getPosition().y);
@@ -141,8 +141,7 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
     ColorShape outline_color = rectangle->getOutlineColor();
 
     // Create a pen for the rectangle outline
-    Gdiplus::Pen rect_outline(Gdiplus::Color(outline_color.a, outline_color.r,
-                                             outline_color.g, outline_color.b),
+    Gdiplus::Pen rect_outline(outline_color.toGDIColor(),
                               rectangle->getOutlineThickness());
     Gdiplus::RectF bound(x, y, width, height);
     Gdiplus::Brush* rect_fill = getBrush(rectangle, bound);
@@ -165,7 +164,7 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
             ColorShape color =
                 rectangle->getGradient()->getStops().back().getColor();
             Gdiplus::SolidBrush corner_fill(
-                Gdiplus::Color(color.a, color.r, color.g, color.b));
+                color.toGDIColor());
             graphics.FillPath(&corner_fill, &path);
         }
 
@@ -178,7 +177,7 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
             ColorShape color =
                 rectangle->getGradient()->getStops().back().getColor();
             Gdiplus::SolidBrush corner_fill(
-                Gdiplus::Color(color.a, color.r, color.g, color.b));
+                color.toGDIColor());
             graphics.FillRectangle(&corner_fill, x, y, width, height);
         }
 
@@ -193,8 +192,7 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
 void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
     ColorShape outline_color = circle->getOutlineColor();
     Gdiplus::Pen circle_outline(
-        Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
-                       outline_color.b),
+        outline_color.toGDIColor(),
         circle->getOutlineThickness());
 
     // Create a bounding rectangle for the circle
@@ -209,7 +207,7 @@ void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
             dynamic_cast< Gdiplus::PathGradientBrush* >(circle_fill)) {
         ColorShape color = circle->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.a, color.r, color.g, color.b));
+            color.toGDIColor());
         graphics.FillEllipse(
             &corner_fill, circle->getPosition().x - circle->getRadius().x,
             circle->getPosition().y - circle->getRadius().y,
@@ -233,8 +231,7 @@ void Renderer::drawEllipse(Gdiplus::Graphics& graphics, MyEllipse* ellipse) cons
     ColorShape outline_color = ellipse->getOutlineColor();
 
     Gdiplus::Pen ellipse_outline(
-        Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
-                       outline_color.b),
+        outline_color.toGDIColor(),
         ellipse->getOutlineThickness());
 
     // Create a bounding rectangle for the ellipse
@@ -248,7 +245,7 @@ void Renderer::drawEllipse(Gdiplus::Graphics& graphics, MyEllipse* ellipse) cons
             dynamic_cast< Gdiplus::PathGradientBrush* >(ellipse_fill)) {
         ColorShape color = ellipse->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.a, color.r, color.g, color.b));
+            color.toGDIColor());
         graphics.FillEllipse(
             &corner_fill, ellipse->getPosition().x - ellipse->getRadius().x,
             ellipse->getPosition().y - ellipse->getRadius().y,
