@@ -31,10 +31,10 @@ Vector2Df MyRectangle::getRadius() const {
 	return radius; 
 }
 
-//void Rectangle::printData() const {
-//    SVGElement::printData();
-//    std::cout << "Width: " << getWidth() << std::endl;
-//    std::cout << "Height: " << getHeight() << std::endl;
-//    std::cout << "Radius: " << getRadius().x << " " << getRadius().y
-//        << std::endl;
-//}
+void MyRectangle::printData() const {
+   SVGElement::printData();
+   std::cout << "Width: " << getWidth() << std::endl;
+   std::cout << "Height: " << getHeight() << std::endl;
+   std::cout << "Radius: " << getRadius().x << " " << getRadius().y
+       << std::endl;
+}

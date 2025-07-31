@@ -39,11 +39,11 @@ Vector2Df MyPolyShape::getMaxBound() const {
     return Vector2Df(max_x, max_y);
 }
 
-//void PolyShape::printData() const {
-//    SVGElement::printData();
-//    std::cout << "Points: ";
-//    for (auto& point : getPoints()) {
-//        std::cout << point.x << "," << point.y << " ";
-//    }
-//    std::cout << std::endl;
-//}
+void MyPolyShape::printData() const {
+   SVGElement::printData();
+   std::cout << "Points: ";
+   for (auto& point : getPoints()) {
+       std::cout << point.x << "," << point.y << " ";
+   }
+   std::cout << std::endl;
+}

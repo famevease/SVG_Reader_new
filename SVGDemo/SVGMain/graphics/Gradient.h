@@ -92,6 +92,4 @@ public:
      * @param stop The stop to be added to the gradient.
      */
     void addStop(Stop stop);
-
-
 };

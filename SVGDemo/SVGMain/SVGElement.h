@@ -111,14 +111,14 @@ public:
      *
      * @return The minimum bound of the shape.
      */
-    virtual Vector2Df getMinBound() const;
+    virtual Vector2Df getMinBound() const = 0;
 
     /**
      * @brief Gets the maximum bound of the shape.
      *
      * @return The maximum bound of the shape.
      */
-    virtual Vector2Df getMaxBound() const;
+    virtual Vector2Df getMaxBound() const = 0;
 
     /**
      * @brief Prints the data of the shape.
@@ -126,7 +126,7 @@ public:
      * @note This function is used for debugging purposes.
      * @note This function is virtual and can be overridden by derived classes.
      */
-    //virtual void printData() const;
+    virtual void printData() const = 0;
 
     /**
      * @brief Sets the transformations of the shape.
@@ -144,7 +144,7 @@ public:
      * @note The default transformations of the shape is empty.
      * @note The transformations can be either "translate", "rotate", "scale",
      */
-    std::vector< std::string > getTransforms() const;
+    virtual std::vector< std::string > getTransforms() const = 0;
 
     /**
      * @brief Parent pointer setter to make the composite design pattern
@@ -160,7 +160,7 @@ public:
      * @return The parent pointer
      * @note This function is used for composite design pattern
      */
-    SVGElement* getParent() const;
+    virtual SVGElement* getParent() const = 0;
 
     /**
      * @brief Sets the gradient of the shape.
@@ -184,7 +184,7 @@ public:
      * @note This function is used for composite design pattern
      * @note This function is virtual and can be overridden by derived classes.
      */
-    virtual void addElement(SVGElement* element);
+    virtual void addElement(SVGElement* element) = 0;
 
 protected:
     /**

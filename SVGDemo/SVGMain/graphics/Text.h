@@ -95,6 +95,6 @@ public:
     /**
      * @brief Prints the data of the text.
      */
-    /*void printData() const override;*/
+    void printData() const override;
 };
 

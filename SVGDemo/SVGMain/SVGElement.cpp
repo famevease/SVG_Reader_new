@@ -53,7 +53,7 @@ Vector2Df SVGElement::getMaxBound() const {
 }
 
 void SVGElement::printData() const {
-   std::cout << "Shape: " << getShape() << std::endl;
+   std::cout << "Shape: " << getClass() << std::endl;
    std::cout << "Fill: " << getFillColor() << std::endl;
    std::cout << "Stroke: " << getOutlineColor() << std::endl;
    std::cout << "Stroke width: " << getOutlineThickness() << std::endl;

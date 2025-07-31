@@ -25,8 +25,8 @@ void Text::setFontStyle(std::string font_style) { this->style = font_style; }
 
 std::string Text::getFontStyle() const { return style; }
 
-//void Text::printData() const {
-//    SVGElement::printData();
-//    std::cout << "Content: " << getContent() << std::endl;
-//    std::cout << "Font size: " << getFontSize() << std::endl;
-//}
+void Text::printData() const {
+   SVGElement::printData();
+   std::cout << "Content: " << getContent() << std::endl;
+   std::cout << "Font size: " << getFontSize() << std::endl;
+}

@@ -68,6 +68,6 @@ public:
      *
      * @note This function is used for debugging purposes.
      */
-    //void printData() const override;
+    void printData() const override;
 };
 

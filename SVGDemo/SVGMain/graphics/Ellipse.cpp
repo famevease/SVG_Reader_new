@@ -23,7 +23,7 @@ Vector2Df MyEllipse::getMaxBound() const {
     return Vector2Df(getPosition().x + getRadius().x, getPosition().y + getRadius().y);
 }
 
-//void Ellipse::printData() const {
-//    SVGElement::printData();
-//    std::cout << "Radius: " << getRadius().x << " " << getRadius().y << std::endl;
-//}
+void MyEllipse::printData() const {
+   SVGElement::printData();
+   std::cout << "Radius: " << getRadius().x << " " << getRadius().y << std::endl;
+}
