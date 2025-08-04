@@ -1,4 +1,5 @@
 #include "DrawShape.h"
+#include "BrushUtils.h"
 
 // Draw a line on the given graphics context
 void DrawShape::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
@@ -151,10 +152,7 @@ void DrawShape::drawEllipse(Gdiplus::Graphics& graphics, MyEllipse* ellipse) con
 // Draw a polygon on the given graphics context
 void DrawShape::drawPolygon(Gdiplus::Graphics& graphics, MyPolygon* polygon) const {
     ColorShape outline_color = polygon->getOutlineColor();
-    Gdiplus::Pen polygon_outline(
-        Gdiplus::Color(outline_color.getA(), outline_color.getR(), outline_color.getG(),
-                       outline_color.getB()),
-        polygon->getOutlineThickness());
+    Gdiplus::Pen polygon_outline(outline_color.toGDIColor(), polygon->getOutlineThickness());
 
     // Extract vertices and create an array of Gdiplus::PointF
     Gdiplus::PointF* points = new Gdiplus::PointF[polygon->getPoints().size()];
@@ -178,14 +176,14 @@ void DrawShape::drawPolygon(Gdiplus::Graphics& graphics, MyPolygon* polygon) con
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
     // Get the fill brush for the polygon
-    Gdiplus::Brush* polygon_fill = getBrush(polygon, bound);
+    BrushUtils brush_utils;
+    Gdiplus::Brush* polygon_fill = brush_utils.getBrush(polygon, bound);
 
     // If the fill brush is a gradient, fill the polygon with a corner color
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(polygon_fill)) {
         ColorShape color = polygon->getGradient()->getStops().back().getColor();
-        Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
+        Gdiplus::SolidBrush corner_fill(color.toGDIColor());
         graphics.FillPolygon(&corner_fill, points, idx, fill_mode);
     }
 
@@ -200,10 +198,7 @@ void DrawShape::drawPolygon(Gdiplus::Graphics& graphics, MyPolygon* polygon) con
 void DrawShape::drawPolyline(Gdiplus::Graphics& graphics,
                             MyPolyLine* polyline) const {
     ColorShape outline_color = polyline->getOutlineColor();
-    Gdiplus::Pen polyline_outline(
-        Gdiplus::Color(outline_color.getA(), outline_color.getR(), outline_color.getG(),
-                       outline_color.getB()),
-        polyline->getOutlineThickness());
+    Gdiplus::Pen polyline_outline(outline_color.toGDIColor(), polyline->getOutlineThickness());
 
     // Determine the fill mode based on the polyline's fill rule
     Gdiplus::FillMode fill_mode;
@@ -231,15 +226,15 @@ void DrawShape::drawPolyline(Gdiplus::Graphics& graphics,
     Vector2Df max_bound = polyline->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
-    Gdiplus::Brush* polyline_fill = getBrush(polyline, bound);
+    BrushUtils brush_utils;
+    Gdiplus::Brush* polyline_fill = brush_utils.getBrush(polyline, bound);
 
     // If the fill brush is a gradient, fill the polyline with a corner color
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(polyline_fill)) {
         ColorShape color =
             polyline->getGradient()->getStops().back().getColor();
-        Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
+        Gdiplus::SolidBrush corner_fill(color.toGDIColor());
         graphics.FillPath(&corner_fill, &path);
     }
 
@@ -247,73 +242,6 @@ void DrawShape::drawPolyline(Gdiplus::Graphics& graphics,
     graphics.DrawPath(&polyline_outline, &path);
 
     delete polyline_fill;
-}
-
-// Draw text on the given graphics context
-void DrawShape::drawText(Gdiplus::Graphics& graphics, Text* text) const {
-    ColorShape outline_color = text->getOutlineColor();
-    graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);
-
-    Gdiplus::Pen text_outline(Gdiplus::Color(outline_color.getA(), outline_color.getR(),
-                                             outline_color.getG(), outline_color.getB()),
-                              text->getOutlineThickness());
-
-    // Set the font family for the text
-    Gdiplus::FontFamily font_family(L"Times New Roman");
-
-    // Set the position for the text
-    Gdiplus::PointF position(text->getPosition().x, text->getPosition().y);
-    Gdiplus::GraphicsPath path;
-
-    // Convert the content to wide string for GDI+
-    std::wstring_convert< std::codecvt_utf8_utf16< wchar_t > > converter;
-    std::wstring wide_content = converter.from_bytes(text->getContent());
-
-    // Set text alignment based on anchor position
-    Gdiplus::StringFormat string_format;
-    if (text->getAnchor() == "middle") {
-        string_format.SetAlignment(Gdiplus::StringAlignmentCenter);
-        position.X += 7;
-    } else if (text->getAnchor() == "end") {
-        string_format.SetAlignment(Gdiplus::StringAlignmentFar);
-        position.X += 14;
-    } else {
-        string_format.SetAlignment(Gdiplus::StringAlignmentNear);
-    }
-
-    // Set font style based on text style
-    Gdiplus::FontStyle font_style = Gdiplus::FontStyleRegular;
-    if (text->getFontStyle() == "italic" || text->getFontStyle() == "oblique") {
-        font_style = Gdiplus::FontStyleItalic;
-        position.Y -= 1;
-    }
-
-    path.AddString(wide_content.c_str(), wide_content.size(), &font_family,
-                   font_style, text->getFontSize(), position, &string_format);
-    Gdiplus::RectF bound;
-    path.GetBounds(&bound);
-    Gdiplus::Brush* text_fill = getBrush(text, bound);
-
-    // If the fill brush is a gradient, fill the text with a corner color
-    if (Gdiplus::PathGradientBrush* brush =
-            dynamic_cast< Gdiplus::PathGradientBrush* >(text_fill)) {
-        ColorShape color = text->getGradient()->getStops().back().getColor();
-        Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
-        graphics.FillPath(&corner_fill, &path);
-    }
-
-    graphics.FillPath(text_fill, &path);
-    if (text->getOutlineColor().getA() != 0 &&
-        text->getOutlineColor().getA() == text->getFillColor().getA()) {
-        text_outline.SetColor(Gdiplus::Color(255, 255, 255, 255));
-        graphics.DrawPath(&text_outline, &path);
-        text_outline.SetColor(Gdiplus::Color(outline_color.getA(), outline_color.getR(),
-                                             outline_color.getG(), outline_color.getB()));
-    }
-    graphics.DrawPath(&text_outline, &path);
-
-    delete text_fill;
 }
 
 // Draw a path on the given graphics context
@@ -560,3 +488,69 @@ void DrawShape::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     delete path_fill;
 }
 
+// Draw text on the given graphics context
+void DrawShape::drawText(Gdiplus::Graphics& graphics, Text* text) const {
+    ColorShape outline_color = text->getOutlineColor();
+    graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);
+
+    Gdiplus::Pen text_outline(Gdiplus::Color(outline_color.getA(), outline_color.getR(),
+                                             outline_color.getG(), outline_color.getB()),
+                              text->getOutlineThickness());
+
+    // Set the font family for the text
+    Gdiplus::FontFamily font_family(L"Times New Roman");
+
+    // Set the position for the text
+    Gdiplus::PointF position(text->getPosition().x, text->getPosition().y);
+    Gdiplus::GraphicsPath path;
+
+    // Convert the content to wide string for GDI+
+    std::wstring_convert< std::codecvt_utf8_utf16< wchar_t > > converter;
+    std::wstring wide_content = converter.from_bytes(text->getContent());
+
+    // Set text alignment based on anchor position
+    Gdiplus::StringFormat string_format;
+    if (text->getAnchor() == "middle") {
+        string_format.SetAlignment(Gdiplus::StringAlignmentCenter);
+        position.X += 7;
+    } else if (text->getAnchor() == "end") {
+        string_format.SetAlignment(Gdiplus::StringAlignmentFar);
+        position.X += 14;
+    } else {
+        string_format.SetAlignment(Gdiplus::StringAlignmentNear);
+    }
+
+    // Set font style based on text style
+    Gdiplus::FontStyle font_style = Gdiplus::FontStyleRegular;
+    if (text->getFontStyle() == "italic" || text->getFontStyle() == "oblique") {
+        font_style = Gdiplus::FontStyleItalic;
+        position.Y -= 1;
+    }
+
+    path.AddString(wide_content.c_str(), wide_content.size(), &font_family,
+                   font_style, text->getFontSize(), position, &string_format);
+    Gdiplus::RectF bound;
+    path.GetBounds(&bound);
+    Gdiplus::Brush* text_fill = getBrush(text, bound);
+
+    // If the fill brush is a gradient, fill the text with a corner color
+    if (Gdiplus::PathGradientBrush* brush =
+            dynamic_cast< Gdiplus::PathGradientBrush* >(text_fill)) {
+        ColorShape color = text->getGradient()->getStops().back().getColor();
+        Gdiplus::SolidBrush corner_fill(
+            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
+        graphics.FillPath(&corner_fill, &path);
+    }
+
+    graphics.FillPath(text_fill, &path);
+    if (text->getOutlineColor().getA() != 0 &&
+        text->getOutlineColor().getA() == text->getFillColor().getA()) {
+        text_outline.SetColor(Gdiplus::Color(255, 255, 255, 255));
+        graphics.DrawPath(&text_outline, &path);
+        text_outline.SetColor(Gdiplus::Color(outline_color.getA(), outline_color.getR(),
+                                             outline_color.getG(), outline_color.getB()));
+    }
+    graphics.DrawPath(&text_outline, &path);
+
+    delete text_fill;
+}

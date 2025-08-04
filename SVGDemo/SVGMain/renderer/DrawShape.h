@@ -57,6 +57,14 @@ private:
     void drawPolyline(Gdiplus::Graphics& graphics, MyPolyLine* polyline) const;
 
     /**
+     * @brief Draws a path shape using Gdiplus::Graphics.
+     *
+     * @param graphics The Gdiplus::Graphics context for drawing.
+     * @param path The Path object representing the path to be drawn.
+     */
+    void drawPath(Gdiplus::Graphics& graphics, Path* path) const;
+
+    /**
      * @brief Draws text using Gdiplus::Graphics.
      *
      * @param graphics The Gdiplus::Graphics context for drawing.
@@ -64,13 +72,6 @@ private:
      */
     void drawText(Gdiplus::Graphics& graphics, Text* text) const;
 
-    /**
-     * @brief Draws a path shape using Gdiplus::Graphics.
-     *
-     * @param graphics The Gdiplus::Graphics context for drawing.
-     * @param path The Path object representing the path to be drawn.
-     */
-    void drawPath(Gdiplus::Graphics& graphics, Path* path) const;
 };
 
 #endif
