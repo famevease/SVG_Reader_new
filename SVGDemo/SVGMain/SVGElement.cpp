@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "SVGElement.h"
 
 SVGElement::SVGElement() : fill(ColorShape::Black), stroke(ColorShape::Transparent), stroke_width(0), gradient(NULL) {}

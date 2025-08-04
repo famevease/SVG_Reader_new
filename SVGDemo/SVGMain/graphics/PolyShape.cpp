@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "PolyShape.h"
 
 MyPolyShape::MyPolyShape(const ColorShape& fill, const ColorShape& stroke, float stroke_width): SVGElement(fill, stroke, stroke_width) {}

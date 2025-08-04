@@ -6,7 +6,7 @@
 #include <string>
 #include <algorithm>
 
-#include "SVGElement.h"
+#include "../SVGElement.h"
 #include "TransformUtils.h"
 #include "LinearGradient.h"
 #include "RadialGradient.h"

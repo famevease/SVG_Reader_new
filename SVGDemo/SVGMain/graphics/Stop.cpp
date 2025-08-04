@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Stop.h"
 
 Stop::Stop(const ColorShape& color, float offset): color(color), offset(offset) {}

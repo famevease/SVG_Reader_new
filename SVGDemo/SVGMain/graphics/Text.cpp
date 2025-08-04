@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Text.h"
 
 Text::Text(Vector2Df pos, std::string text, float font_size,

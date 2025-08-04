@@ -1,7 +1,5 @@
 #pragma once
-
-#include "GdiHelper.h"
-#include "SVGElement.h"
+#include "../SVGElement.h"
 
 /**
  * @brief Abstract base class for polygon and polyline shapes in 2D space.

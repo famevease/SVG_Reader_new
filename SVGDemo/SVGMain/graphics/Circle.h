@@ -1,5 +1,4 @@
 #pragma once
-#include "GdiHelper.h"
 #include "Ellipse.h"
 
 /**

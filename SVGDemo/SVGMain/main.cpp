@@ -4,6 +4,8 @@
 #include <windows.h>
 #include <gdiplus.h>
 
+#include <iostream>
+
 // clang-format on
 
 #include "Parser.h"

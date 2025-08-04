@@ -1,7 +1,6 @@
 #pragma once
 
-#include "GdiHelper.h"
-#include "SVGElement.h"
+#include "../SVGElement.h"
 
 /**
  * @brief Represents text in 2D space.

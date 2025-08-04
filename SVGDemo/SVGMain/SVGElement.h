@@ -1,12 +1,7 @@
 #ifndef SVGELEMENT_H
 #define SVGELEMENT_H
 
-#include "graphics/stdafx.h"
-
-#include "ColorShape.h"
-#include "Gradient.h"
-#include "Vector2D.hpp"
-
+#include "Graphics.hpp"
 /**
  * @brief Represents an element in an SVG file.
  * @note This class is abstract and cannot be instantiated.

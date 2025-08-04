@@ -1,7 +1,5 @@
 #pragma once
-
-#include "GdiHelper.h"
-#include "SVGElement.h"
+#include "../SVGElement.h"
 
 /**
  * @brief A struct that contains a point and a type of point.

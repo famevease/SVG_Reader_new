@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "RadialGradient.h"
 
 RadialGradient::RadialGradient(std::vector< Stop > stops,

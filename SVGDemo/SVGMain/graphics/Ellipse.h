@@ -1,6 +1,5 @@
 #pragma once
-#include "GdiHelper.h"
-#include "SVGElement.h"
+#include "../SVGElement.h"
 
 /**
  * @brief Represents an ellipse in 2D space.

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Path.h"
 
 Path::Path(const ColorShape& fill, const ColorShape& stroke, float stroke_width)

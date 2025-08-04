@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Ellipse.h"
 
 MyEllipse::MyEllipse(const Vector2Df& radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_thickness): SVGElement(fill, stroke, stroke_thickness, center), radius(radius) {}

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Rectangle.h"
 
 MyRectangle::MyRectangle(float width, float height, Vector2Df position, Vector2Df radius, const ColorShape& fill, const ColorShape& stroke, float stroke_width): SVGElement(fill, stroke, stroke_width, position), width(width), height(height), radius(radius) {}

@@ -1,9 +1,13 @@
 ﻿#ifndef COLOR_SHAPE_H
 #define COLOR_SHAPE_H
 
-#include "GdiHelper.h"
+#include <string>
 #include <iostream>
 #include <map>
+#include <Windows.h>
+#include <gdiplus.h>
+#include <sstream>
+using namespace Gdiplus;
 
 class ColorShape
 {
@@ -20,19 +24,19 @@ public:
 
 	ColorShape();
 	ColorShape(BYTE r, BYTE g, BYTE b, BYTE a = 255);
-	ColorShape(const Gdiplus::Color &color);
+	ColorShape(const Color &color);
 
 	BYTE getR() const;
 	BYTE getG() const;
 	BYTE getB() const;
 	BYTE getA() const;
 
-	Gdiplus::Color toGDIColor() const;
+	Color toGDIColor() const;
 
 	friend std::ostream &operator<<(std::ostream &os, const ColorShape &color);
 
 private:
-	Gdiplus::Color color;
+	Color color;
 };
 /**
  * @brief A static map of named colors (CSS/SVG style names)

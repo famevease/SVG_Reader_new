@@ -1,6 +1,5 @@
 #pragma once
 
-#include "GdiHelper.h"
 #include "PolyShape.h"
 
 /**

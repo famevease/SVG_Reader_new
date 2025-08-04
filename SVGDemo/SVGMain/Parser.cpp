@@ -1,5 +1,5 @@
-#include "graphics/stdafx.h"
 #include "Parser.h"
+#include <objidl.h>
 
 Parser* Parser::instance = nullptr;
 

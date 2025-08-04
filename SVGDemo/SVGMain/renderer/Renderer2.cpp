@@ -4,7 +4,7 @@
 #include <codecvt>
 #include <locale>
 
-#include "SVGElement.h"
+#include "../SVGElement.h"
 #include "DrawShape.h"
 #include "TransformUtils.h"
 
