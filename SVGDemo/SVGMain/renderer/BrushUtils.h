@@ -8,8 +8,7 @@
 
 #include "../SVGElement.h"
 #include "TransformUtils.h"
-#include "LinearGradient.h"
-#include "RadialGradient.h"
+#include "../Graphics.hpp"
 
 class BrushUtils {
 public:

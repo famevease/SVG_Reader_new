@@ -1,6 +1,7 @@
 // clang-format off
 #include <winsock2.h>
 #include <objidl.h>
+#include <wingdi.h>
 #include <windows.h>
 #include <gdiplus.h>
 

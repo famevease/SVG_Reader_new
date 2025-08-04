@@ -3,15 +3,14 @@
 // clang-format off
 #include <winsock2.h>
 #include <objidl.h>
-#include <wingdi.h>
 #include <windows.h>
 #include <gdiplus.h>
 
 // clang-format on
 #include "../Graphics.hpp"
-// #include "SVGElement.h"
-// #include "DrawShape.h"
-// #include "TransformUtils.h"
+ #include "../SVGElement.h"
+ #include "DrawShape.h"
+ #include "TransformUtils.h"
 
 /**
  * @brief Singleton class responsible for rendering shapes using GDI+.

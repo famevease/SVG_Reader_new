@@ -2,7 +2,7 @@
 #define DRAWSHAPE_H
 
 #include <gdiplus.h>
-#include "Graphics.hpp"
+#include "../Graphics.hpp"
 #include "BrushUtils.h"
 
 class DrawShape {
