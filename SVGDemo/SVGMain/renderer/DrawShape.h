@@ -6,7 +6,6 @@
 #include "BrushUtils.h"
 
 class DrawShape {
-public:
 private:
     /**
      * @brief Draws a line shape using Gdiplus::Graphics.
@@ -71,7 +70,6 @@ private:
      * @param text The Text object representing the text to be drawn.
      */
     void drawText(Gdiplus::Graphics& graphics, Text* text) const;
-
 };
 
 #endif

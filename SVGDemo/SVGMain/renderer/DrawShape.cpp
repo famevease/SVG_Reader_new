@@ -1,3 +1,6 @@
+#include <windows.h>    //for func utf8_to_wstring
+#include <string>       //for func utf8_to_wstring
+
 #include "DrawShape.h"
 #include "BrushUtils.h"
 
@@ -247,9 +250,7 @@ void DrawShape::drawPolyline(Gdiplus::Graphics& graphics,
 // Draw a path on the given graphics context
 void DrawShape::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     ColorShape outline_color = path->getOutlineColor();
-    Gdiplus::Pen path_outline(Gdiplus::Color(outline_color.getA(), outline_color.getR(),
-                                             outline_color.getG(), outline_color.getB()),
-                              path->getOutlineThickness());
+    Gdiplus::Pen path_outline(outline_color.toGDIColor(), path->getOutlineThickness());
 
     // Fill the path by rules
     Gdiplus::FillMode fill_mode;
@@ -338,10 +339,10 @@ void DrawShape::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             // Calculate reflection control point
             Vector2Df auto_control_point;
             if (i > 0 && (points[i - 1].tc == 'q' || points[i - 1].tc == 't')) {
-                // If the previous point is a quadratic bezier or a smooth
-                // quadratic bezier,
-                // calculate the reflection control point using the reflection
-                // formula
+                /*
+                If the previous point is a quadratic bezier or a smooth quadratic bezier,
+                calculate the reflection control point using the reflection formula
+                */
                 auto_control_point.x = cur_point.x * 2 - points[i - 2].point.x;
                 auto_control_point.y = cur_point.y * 2 - points[i - 2].point.y;
             } else {
@@ -446,14 +447,14 @@ void DrawShape::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
 
     Gdiplus::RectF bound;
     gdi_path.GetBounds(&bound);
-    Gdiplus::Brush* path_fill = getBrush(path, bound);
+    BrushUtils brush_utils;
+    Gdiplus::Brush* path_fill = brush_utils.getBrush(path, bound);
     Gdiplus::Region region(&gdi_path);
 
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(path_fill)) {
         ColorShape color = path->getGradient()->getStops().back().getColor();
-        Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
+        Gdiplus::SolidBrush corner_fill(Gdiplus::Color(color.toGDIColor()));
 
         if (path->getGradient()->getUnits() == "userSpaceOnUse") {
             float cx = path->getGradient()->getPoints().first.x;
@@ -488,14 +489,24 @@ void DrawShape::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     delete path_fill;
 }
 
+/*
+* It converts a UTF-8 encoded std::string to a UTF-16 std::wstring.
+* This is necessary because Windows APIs and GDI+ use wide strings (wchar_t / UTF-16) — they don’t accept UTF-8 directly.
+*/
+std::wstring utf8_to_wstring(const std::string& str) {
+    if (str.empty()) return L"";
+    int size_needed = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.size(), NULL, 0);
+    std::wstring wstrTo(size_needed, 0);
+    MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.size(), &wstrTo[0], size_needed);
+    return wstrTo;
+}
+
 // Draw text on the given graphics context
 void DrawShape::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     ColorShape outline_color = text->getOutlineColor();
     graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);
 
-    Gdiplus::Pen text_outline(Gdiplus::Color(outline_color.getA(), outline_color.getR(),
-                                             outline_color.getG(), outline_color.getB()),
-                              text->getOutlineThickness());
+    Gdiplus::Pen text_outline(Gdiplus::Color(outline_color.toGDIColor()), text->getOutlineThickness());
 
     // Set the font family for the text
     Gdiplus::FontFamily font_family(L"Times New Roman");
@@ -505,8 +516,7 @@ void DrawShape::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     Gdiplus::GraphicsPath path;
 
     // Convert the content to wide string for GDI+
-    std::wstring_convert< std::codecvt_utf8_utf16< wchar_t > > converter;
-    std::wstring wide_content = converter.from_bytes(text->getContent());
+    std::wstring wide_content = utf8_to_wstring(text->getContent());
 
     // Set text alignment based on anchor position
     Gdiplus::StringFormat string_format;
@@ -531,14 +541,14 @@ void DrawShape::drawText(Gdiplus::Graphics& graphics, Text* text) const {
                    font_style, text->getFontSize(), position, &string_format);
     Gdiplus::RectF bound;
     path.GetBounds(&bound);
-    Gdiplus::Brush* text_fill = getBrush(text, bound);
+    BrushUtils brush_utils;
+    Gdiplus::Brush* text_fill = brush_utils.getBrush(text, bound);
 
     // If the fill brush is a gradient, fill the text with a corner color
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(text_fill)) {
         ColorShape color = text->getGradient()->getStops().back().getColor();
-        Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
+        Gdiplus::SolidBrush corner_fill(Gdiplus::Color(color.toGDIColor()));
         graphics.FillPath(&corner_fill, &path);
     }
 
@@ -547,8 +557,7 @@ void DrawShape::drawText(Gdiplus::Graphics& graphics, Text* text) const {
         text->getOutlineColor().getA() == text->getFillColor().getA()) {
         text_outline.SetColor(Gdiplus::Color(255, 255, 255, 255));
         graphics.DrawPath(&text_outline, &path);
-        text_outline.SetColor(Gdiplus::Color(outline_color.getA(), outline_color.getR(),
-                                             outline_color.getG(), outline_color.getB()));
+        text_outline.SetColor(Gdiplus::Color(outline_color.toGDIColor()));
     }
     graphics.DrawPath(&text_outline, &path);
 
