@@ -1,46 +1,7 @@
 #include "BrushUtils.h"
 
 // Apply transformation matrix operations on a linear gradient brush
-// void BrushUtils::applyTransformsOnLinearBrush(const 
-//     std::vector<std::string>& transform_order,
-//     Gdiplus::LinearGradientBrush*& brush) {
-//     for (auto type : transform_order) {
-//         if (type.find("translate") != std::string::npos) {
-//             // Apply translation transformation
-//             float trans_x = TransformUtils::getTranslate(type).first,
-//                   trans_y = TransformUtils::getTranslate(type).second;
-//             brush->TranslateTransform(trans_x, trans_y);
-//         } else if (type.find("rotate") != std::string::npos) {
-//             // Apply rotation transformation
-//             float degree = TransformUtils::getRotate(type);
-//             brush->RotateTransform(degree);
-//         } else if (type.find("scale") != std::string::npos) {
-//             // Apply scaling transformation
-//             if (type.find(",") != std::string::npos) {
-//                 float scale_x = TransformUtils::getScaleXY(type).first,
-//                       scale_y = TransformUtils::getScaleXY(type).second;
-//                 brush->ScaleTransform(scale_x, scale_y);
-//             } else {
-//                 float scale = TransformUtils::getScale(type);
-//                 brush->ScaleTransform(scale, scale);
-//             }
-//         } else if (type.find("matrix") != std::string::npos) {
-//             // Apply matrix transformation
-//             float a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;
-//             if (type.find(",") != std::string::npos) {
-//                 type.erase(std::remove(type.begin(), type.end(), ','),
-//                            type.end());
-//             }
-//             sscanf_s(type.c_str(), "matrix(%f %f %f %f %f %f)", &a, &b, &c, &d,
-//                    &e, &f);
-//             Gdiplus::Matrix matrix(a, b, c, d, e, f);
-//             brush->SetTransform(&matrix);
-//         }
-//     }
-// }
-
-// Apply transformation matrix operations on a linear gradient brush
-void BrushUtils::applyTransformsOnLinearBrush(const std::vector<std::string>& transform_order, Gdiplus::LinearGradientBrush*& brush) {
+void BrushUtils::applyTransformsOnLinearBrush(std::vector<std::string> transform_order, Gdiplus::LinearGradientBrush*& brush) const {
     Gdiplus::Matrix matrix;
 
     for (const auto& t : transform_order) {
@@ -81,7 +42,7 @@ void BrushUtils::applyTransformsOnLinearBrush(const std::vector<std::string>& tr
 }
 
 // Apply transformation matrix operations on a path gradient brush
-void BrushUtils::applyTransformsOnRadialBrush(const std::vector< std::string >& transform_order, Gdiplus::PathGradientBrush*& brush) {
+void BrushUtils::applyTransformsOnRadialBrush(std::vector<std::string> transform_order, Gdiplus::PathGradientBrush*& brush) const {
     for (auto type : transform_order) {
         if (type.find("translate") != std::string::npos) {
             float trans_x = TransformUtils::getTranslate(type).first,
@@ -136,20 +97,21 @@ Gdiplus::Brush* BrushUtils::getBrush(SVGElement* shape,
             // Set the center color
             offsets[0] = 0;
             offsets[stop_size - 1] = 1;
-            colors[0] =
-                Gdiplus::Color(stops[0].getColor().getA(), stops[0].getColor().getR(),
-                               stops[0].getColor().getG(), stops[0].getColor().getB());
-            colors[stop_size - 1] =
-                Gdiplus::Color(stops[stop_size - 3].getColor().getA(),
-                               stops[stop_size - 3].getColor().getR(),
-                               stops[stop_size - 3].getColor().getG(),
-                               stops[stop_size - 3].getColor().getB());
+            colors[0] = stops[0].getColor().toGDIColor();
+                // Gdiplus::Color(stops[0].getColor().getA(), stops[0].getColor().getR(),
+                //                stops[0].getColor().getG(), stops[0].getColor().getB());
+            colors[stop_size - 1] = stops[stop_size - 3].getColor().toGDIColor();
+                // Gdiplus::Color(stops[stop_size - 3].getColor().getA(),
+                //                stops[stop_size - 3].getColor().getR(),
+                //                stops[stop_size - 3].getColor().getG(),
+                //                stops[stop_size - 3].getColor().getB());
 
             // Reverse the order of the stops
             for (size_t i = 1; i < stop_size - 1; ++i) {
-                colors[i] = Gdiplus::Color(
-                    stops[i - 1].getColor().getA(), stops[i - 1].getColor().getR(),
-                    stops[i - 1].getColor().getG(), stops[i - 1].getColor().getB());
+                colors[i] = stops[i - 1].getColor().toGDIColor();
+                // colors[i] = Gdiplus::Color(
+                //     stops[i - 1].getColor().getA(), stops[i - 1].getColor().getR(),
+                //     stops[i - 1].getColor().getG(), stops[i - 1].getColor().getB());
                 offsets[i] = stops[i - 1].getOffset();
             }
 
@@ -190,21 +152,23 @@ Gdiplus::Brush* BrushUtils::getBrush(SVGElement* shape,
             // Set the center color
             offsets[0] = 0;
             offsets[stop_size - 1] = 1;
-            colors[0] = Gdiplus::Color(stops[stop_size - 3].getColor().getA(),
-                                       stops[stop_size - 3].getColor().getR(),
-                                       stops[stop_size - 3].getColor().getG(),
-                                       stops[stop_size - 3].getColor().getB());
-            colors[stop_size - 1] =
-                Gdiplus::Color(stops[0].getColor().getA(), stops[0].getColor().getR(),
-                               stops[0].getColor().getG(), stops[0].getColor().getB());
+            colors[0] = stops[stop_size - 3].getColor().toGDIColor();
+                        // Gdiplus::Color(stops[stop_size - 3].getColor().getA(),
+                        //                stops[stop_size - 3].getColor().getR(),
+                        //                stops[stop_size - 3].getColor().getG(),
+                        //                stops[stop_size - 3].getColor().getB());
+            colors[stop_size - 1] = stops[0].getColor().toGDIColor();
+                // Gdiplus::Color(stops[0].getColor().getA(), stops[0].getColor().getR(),
+                //                stops[0].getColor().getG(), stops[0].getColor().getB());
 
             // Reverse the order of the stops
             for (size_t i = 1; i < stop_size - 1; ++i) {
-                colors[i] =
-                    Gdiplus::Color(stops[stop_size - 2 - i].getColor().getA(),
-                                   stops[stop_size - 2 - i].getColor().getR(),
-                                   stops[stop_size - 2 - i].getColor().getG(),
-                                   stops[stop_size - 2 - i].getColor().getB());
+                colors[i] = stops[stop_size - 2 - i].getColor().toGDIColor();
+                // colors[i] =
+                //     Gdiplus::Color(stops[stop_size - 2 - i].getColor().getA(),
+                //                    stops[stop_size - 2 - i].getColor().getR(),
+                //                    stops[stop_size - 2 - i].getColor().getG(),
+                //                    stops[stop_size - 2 - i].getColor().getB());
                 offsets[i] = 1 - stops[stop_size - 2 - i].getOffset();
             }
 
@@ -217,8 +181,7 @@ Gdiplus::Brush* BrushUtils::getBrush(SVGElement* shape,
     } 
     else {
         ColorShape color = shape->getFillColor();
-        Gdiplus::SolidBrush* fill = new Gdiplus::SolidBrush(
-            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
+        Gdiplus::SolidBrush* fill = new Gdiplus::SolidBrush(color.toGDIColor());
         return fill;
     }
 

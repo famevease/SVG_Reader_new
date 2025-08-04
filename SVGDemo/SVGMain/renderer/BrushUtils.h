@@ -12,7 +12,7 @@
 #include "RadialGradient.h"
 
 class BrushUtils {
-private:
+public:
     /**
      * @brief Utility function to apply a series of transformations to the brush
      * object.
@@ -21,8 +21,8 @@ private:
      * applied.
      * @param brush The Gdiplus::LinearGradientBrush object for the shape fill.
      */
-    static void applyTransformsOnLinearBrush(const std::vector<std::string>& transform_order, 
-                                Gdiplus::LinearGradientBrush*& brush);
+    void applyTransformsOnLinearBrush(std::vector<std::string> transform_order, 
+                                Gdiplus::LinearGradientBrush*& brush) const;
 
     /**
      * @brief Utility function to apply a series of transformations to the brush
@@ -33,8 +33,8 @@ private:
      * @param brush The Gdiplus::PathGradientBrush object for the shape fill.
      *
      */
-    static void applyTransformsOnRadialBrush(const std::vector<std::string>& transform_order,
-                                 Gdiplus::PathGradientBrush*& brush);
+    void applyTransformsOnRadialBrush(std::vector<std::string> transform_order,
+                                 Gdiplus::PathGradientBrush*& brush) const;
 
     /**
      * @brief Gets the Gdiplus::brush object for the shape fill.
