@@ -18,6 +18,66 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml.hpp" />
+    <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_iterators.hpp" />
+    <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_print.hpp" />
+    <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_utils.hpp" />
+    <ClInclude Include="..\SVGDemo\SVGMain\Graphics.hpp" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Circle.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\ColorShape.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Ellipse.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Gradient.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Group.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Line.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\LinearGradient.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Path.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Polygon.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\PolyLine.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\PolyShape.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\RadialGradient.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Rectangle.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Stop.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Text.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Vector2D.hpp" />
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Viewbox.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\Parser.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\renderer\BrushUtils.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\renderer\DrawShape.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\renderer\Renderer2.hpp" />
+    <ClInclude Include="..\SVGDemo\SVGMain\renderer\TransformUtils.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\SVGElement.h" />
+    <ClInclude Include="..\SVGDemo\SVGMain\Viewer.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Circle.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\ColorShape.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Ellipse.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Gradient.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Group.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Line.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\LinearGradient.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Path.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Polygon.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\PolyLine.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\PolyShape.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\RadialGradient.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Rectangle.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Stop.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Text.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Viewbox.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\main.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\Parser.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\renderer\BrushUtils.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\renderer\DrawShape.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\renderer\Renderer2.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\renderer\TransformUtils.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\SVGElement.cpp" />
+    <ClCompile Include="..\SVGDemo\SVGMain\Viewer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SVGDemo\SVGMain\sample\sample.svg" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -102,10 +162,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>D:\PROJECT\SVG_Reader_new\SVGDemo</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Gdiplus.lib; Ole32.lib; Ws2_32.lib;User32.lib; Gdi32.lib; Kernel32.lib; Comctl32.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,78 +186,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml.hpp" />
-    <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_iterators.hpp" />
-    <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_print.hpp" />
-    <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_utils.hpp" />
-    <ClInclude Include="..\SVGDemo\SVGMain\Graphics.hpp" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Circle.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\ColorShape.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Ellipse.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\GdiHelper.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Gradient.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Group.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Line.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\LinearGradient.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Path.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Polygon.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\PolyLine.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\PolyShape.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\RadialGradient.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Rectangle.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\stdafx.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Stop.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\targetver.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Text.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Vector2D.hpp" />
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Viewbox.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\Parser.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\Renderer.hpp" />
-    <ClInclude Include="..\SVGDemo\SVGMain\renderer\BrushUtils.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\renderer\DrawShape.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\renderer\Renderer2.hpp" />
-    <ClInclude Include="..\SVGDemo\SVGMain\renderer\TransformUtils.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\resource.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\SVGDemo.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\SVGElement.h" />
-    <ClInclude Include="..\SVGDemo\SVGMain\Viewer.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Circle.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\ColorShape.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Ellipse.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Gradient.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Group.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Line.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\LinearGradient.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Path.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Polygon.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\PolyLine.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\PolyShape.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\RadialGradient.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Rectangle.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\stdafx.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Stop.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Text.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\Viewbox.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\main.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\Parser.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\Renderer.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\renderer\BrushUtils.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\renderer\DrawShape.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\renderer\Renderer2.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\renderer\TransformUtils.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\SVGDemo.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\SVGElement.cpp" />
-    <ClCompile Include="..\SVGDemo\SVGMain\Viewer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\SVGDemo\SVGMain\graphics\Color.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\SVGDemo\SVGMain\sample\sample.svg" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

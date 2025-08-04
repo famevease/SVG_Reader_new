@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\graphics">
+      <UniqueIdentifier>{a2140998-a752-4ad4-9ca1-abbd904b7e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\renderer">
+      <UniqueIdentifier>{6a8de9c0-6d15-4cf4-be82-f96a831870c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\graphics">
+      <UniqueIdentifier>{1ad0a582-1d6d-4278-91b3-a0d7a034862b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{e61ab68a-44b1-408c-a0a4-a0b03d8a8806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\rapidxml">
+      <UniqueIdentifier>{854fd328-e58e-474c-a064-38e84f91ffa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\renderer">
+      <UniqueIdentifier>{f63ec608-c3ce-45ff-801d-8ce1a5ac08bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SVGDemo\SVGMain\Graphics.hpp">
@@ -21,104 +39,86 @@
     <ClInclude Include="..\SVGDemo\SVGMain\Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\Renderer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\SVGDemo\SVGMain\SVGElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\Viewer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\SVGDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Circle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\ColorShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Ellipse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\GdiHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Gradient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Group.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Line.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\LinearGradient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Polygon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\PolyLine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\PolyShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\RadialGradient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Rectangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Stop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Vector2D.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Viewbox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\renderer\BrushUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\renderer\DrawShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\renderer\Renderer2.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\renderer\TransformUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>external\rapidxml</Filter>
     </ClInclude>
     <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_iterators.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>external\rapidxml</Filter>
     </ClInclude>
     <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_print.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>external\rapidxml</Filter>
     </ClInclude>
     <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml_utils.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>external\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Circle.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\ColorShape.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Ellipse.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Gradient.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Group.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Line.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\LinearGradient.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Path.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Polygon.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\PolyLine.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\PolyShape.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\RadialGradient.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Rectangle.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Stop.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Vector2D.hpp">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Viewbox.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\Viewer.hpp">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\graphics\Text.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\renderer\BrushUtils.h">
+      <Filter>Header Files\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\renderer\DrawShape.h">
+      <Filter>Header Files\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\renderer\Renderer2.hpp">
+      <Filter>Header Files\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\renderer\TransformUtils.h">
+      <Filter>Header Files\renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,86 +128,76 @@
     <ClCompile Include="..\SVGDemo\SVGMain\Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\SVGDemo\SVGMain\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\SVGElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\SVGDemo\SVGMain\Viewer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SVGDemo\SVGMain\SVGDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Circle.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\ColorShape.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Ellipse.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Gradient.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Group.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Line.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\LinearGradient.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Path.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Polygon.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\PolyLine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\PolyShape.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\RadialGradient.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Rectangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SVGDemo\SVGMain\graphics\stdafx.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Stop.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Text.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Viewbox.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SVGDemo\SVGMain\Viewer.cpp">
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\renderer\BrushUtils.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\renderer\DrawShape.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\renderer\Renderer2.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\renderer\TransformUtils.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\SVGDemo\SVGMain\graphics\Color.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\SVGDemo\SVGMain\sample\sample.svg" />
+    <None Include="..\SVGDemo\SVGMain\sample\sample.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
