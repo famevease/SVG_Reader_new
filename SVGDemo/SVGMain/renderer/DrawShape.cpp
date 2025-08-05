@@ -8,7 +8,7 @@
 void DrawShape::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
     // Extract color and thickness information from the Line object
     ColorShape color = line->getOutlineColor();
-    Gdiplus::Pen linePen(Gdiplus::Color(color.a, color.r, color.g, color.b),
+    Gdiplus::Pen linePen(Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()),
                          line->getOutlineThickness());
     // Extract start and end points from the Line object
     Gdiplus::PointF startPoint(line->getPosition().x, line->getPosition().y);
@@ -26,11 +26,12 @@ void DrawShape::drawRectangle(Gdiplus::Graphics& graphics,
     ColorShape outline_color = rectangle->getOutlineColor();
 
     // Create a pen for the rectangle outline
-    Gdiplus::Pen rect_outline(Gdiplus::Color(outline_color.a, outline_color.r,
-                                             outline_color.g, outline_color.b),
-                              rectangle->getOutlineThickness());
+    Gdiplus::Pen rect_outline(Gdiplus::Color(outline_color.getA(), outline_color.getR(),
+                                             outline_color.getG(), outline_color.getB())
+                        ,rectangle->getOutlineThickness());
     Gdiplus::RectF bound(x, y, width, height);
-    Gdiplus::Brush* rect_fill = getBrush(rectangle, bound);
+    BrushUtils brush_utils;
+    Gdiplus::Brush* rect_fill = brush_utils.getBrush(rectangle, bound);
 
     // Check if the rectangle has rounded corners
     if (rectangle->getRadius().x != 0 || rectangle->getRadius().y != 0) {
@@ -50,7 +51,7 @@ void DrawShape::drawRectangle(Gdiplus::Graphics& graphics,
             ColorShape color =
                 rectangle->getGradient()->getStops().back().getColor();
             Gdiplus::SolidBrush corner_fill(
-                Gdiplus::Color(color.a, color.r, color.g, color.b));
+                Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
             graphics.FillPath(&corner_fill, &path);
         }
 
@@ -63,7 +64,7 @@ void DrawShape::drawRectangle(Gdiplus::Graphics& graphics,
             ColorShape color =
                 rectangle->getGradient()->getStops().back().getColor();
             Gdiplus::SolidBrush corner_fill(
-                Gdiplus::Color(color.a, color.r, color.g, color.b));
+                Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
             graphics.FillRectangle(&corner_fill, x, y, width, height);
         }
 
@@ -78,8 +79,8 @@ void DrawShape::drawRectangle(Gdiplus::Graphics& graphics,
 void DrawShape::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
     ColorShape outline_color = circle->getOutlineColor();
     Gdiplus::Pen circle_outline(
-        Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
-                       outline_color.b),
+        Gdiplus::Color(outline_color.getA(), outline_color.getR(), outline_color.getG(),
+                       outline_color.getB()),
         circle->getOutlineThickness());
 
     // Create a bounding rectangle for the circle
@@ -87,14 +88,15 @@ void DrawShape::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
     Vector2Df max_bound = circle->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
-    Gdiplus::Brush* circle_fill = getBrush(circle, bound);
+	BrushUtils brush_utils;
+    Gdiplus::Brush* circle_fill = brush_utils.getBrush(circle, bound);
 
     // Check if the circle has a gradient fill
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(circle_fill)) {
         ColorShape color = circle->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.a, color.r, color.g, color.b));
+            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
         graphics.FillEllipse(
             &corner_fill, circle->getPosition().x - circle->getRadius().x,
             circle->getPosition().y - circle->getRadius().y,
@@ -118,8 +120,8 @@ void DrawShape::drawEllipse(Gdiplus::Graphics& graphics, MyEllipse* ellipse) con
     ColorShape outline_color = ellipse->getOutlineColor();
 
     Gdiplus::Pen ellipse_outline(
-        Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
-                       outline_color.b),
+        Gdiplus::Color(outline_color.getA(), outline_color.getR(), outline_color.getG(),
+                       outline_color.getB()),
         ellipse->getOutlineThickness());
 
     // Create a bounding rectangle for the ellipse
@@ -127,13 +129,14 @@ void DrawShape::drawEllipse(Gdiplus::Graphics& graphics, MyEllipse* ellipse) con
     Vector2Df max_bound = ellipse->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
-    Gdiplus::Brush* ellipse_fill = getBrush(ellipse, bound);
+	BrushUtils brush_utils;
+    Gdiplus::Brush* ellipse_fill = brush_utils.getBrush(ellipse, bound);
 
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(ellipse_fill)) {
         ColorShape color = ellipse->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
-            Gdiplus::Color(color.a, color.r, color.g, color.b));
+            Gdiplus::Color(color.getA(), color.getR(), color.getG(), color.getB()));
         graphics.FillEllipse(
             &corner_fill, ellipse->getPosition().x - ellipse->getRadius().x,
             ellipse->getPosition().y - ellipse->getRadius().y,
@@ -562,4 +565,37 @@ void DrawShape::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     graphics.DrawPath(&text_outline, &path);
 
     delete text_fill;
+}
+
+void DrawShape::draw(Gdiplus::Graphics& graphics, SVGElement* shape) const {
+    std::string type = shape->getClass();
+
+    if (type == "Group") {
+        // Không xử lý Group tại đây (renderer xử lý)
+        return;
+    }
+    else if (type == "Polyline") {
+        drawPolyline(graphics, dynamic_cast<MyPolyLine*>(shape));
+    }
+    else if (type == "Text") {
+        drawText(graphics, dynamic_cast<Text*>(shape));
+    }
+    else if (type == "Rectangle") {
+        drawRectangle(graphics, dynamic_cast<MyRectangle*>(shape));
+    }
+    else if (type == "Circle") {
+        drawCircle(graphics, dynamic_cast<Circle*>(shape));
+    }
+    else if (type == "Ellipse") {
+        drawEllipse(graphics, dynamic_cast<MyEllipse*>(shape));
+    }
+    else if (type == "Line") {
+        drawLine(graphics, dynamic_cast<Line*>(shape));
+    }
+    else if (type == "Polygon") {
+        drawPolygon(graphics, dynamic_cast<MyPolygon*>(shape));
+    }
+    else if (type == "Path") {
+        drawPath(graphics, dynamic_cast<Path*>(shape));
+    }
 }

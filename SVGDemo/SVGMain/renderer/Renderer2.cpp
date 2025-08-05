@@ -6,7 +6,7 @@
 
 #include "../SVGElement.h"
 #include "DrawShape.h"
-#include "TransformUtils.h"
+#include "../renderer/TransformUtils.h"
 
 Renderer* Renderer::instance = nullptr;
 
@@ -25,7 +25,7 @@ void Renderer::draw(Gdiplus::Graphics& graphics, Group* group) const {
         // Store the original transformation matrix
         Gdiplus::Matrix original;
         graphics.GetTransform(&original);
-
+		DrawShape drawShape;
         // Apply the transformations for the current shape
         TransformUtils::applyTransform(shape->getTransforms(), graphics);
 
@@ -34,7 +34,8 @@ void Renderer::draw(Gdiplus::Graphics& graphics, Group* group) const {
             Group* group = dynamic_cast< Group* >(shape);
             draw(graphics, group);
         } else if (shape->getClass() == "Polyline") {
-            MyPolyLine* polyline = dynamic_cast< MyPolyLine* >(shape);
+            MyPolyLine* polyline = dynamic_cast<MyPolyLine*>(shape);
+            // Draw the polyline using the DrawShape class
             drawPolyline(graphics, polyline);
         } else if (shape->getClass() == "Text") {
             Text* text = dynamic_cast< Text* >(shape);

@@ -1,14 +1,15 @@
 #ifndef BRUSHUTILS_H
 #define BRUSHUTILS_H
 
+#include <Windows.h>
 #include <gdiplus.h>
 #include <vector>
 #include <string>
 #include <algorithm>
-
-#include "../SVGElement.h"
 #include "TransformUtils.h"
-#include "../Graphics.hpp"
+#include "../SVGElement.h"
+#include "../graphics/RadialGradient.h"
+
 
 class BrushUtils {
 public:

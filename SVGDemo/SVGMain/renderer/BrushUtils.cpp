@@ -1,8 +1,8 @@
 #include "BrushUtils.h"
-
+using namespace Gdiplus;
 // Apply transformation matrix operations on a linear gradient brush
-void BrushUtils::applyTransformsOnLinearBrush(std::vector<std::string> transform_order, Gdiplus::LinearGradientBrush*& brush) const {
-    Gdiplus::Matrix matrix;
+void BrushUtils::applyTransformsOnLinearBrush(std::vector<std::string> transform_order, LinearGradientBrush*& brush) const {
+    Matrix matrix;
 
     for (const auto& t : transform_order) {
         std::string type = t; // cloned
