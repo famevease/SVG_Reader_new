@@ -85,7 +85,11 @@ public:
      * @note This function is used for debugging purposes.
      */
     void printData() const override;
-
+    Vector2Df getMinBound() const override;
+    Vector2Df getMaxBound() const override;
+    vector<string> getTransforms() const override;
+    SVGElement* getParent() const override;
+    void addElement(SVGElement* element) override;
 private:
     std::vector< PathPoint > points;  ///< Vector of points in the path
     std::string fill_rule;            ///< Fill rule of the path

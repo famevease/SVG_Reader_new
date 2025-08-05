@@ -187,7 +187,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The rect element
      */
-    class Rectangle* parseRect(rapidxml::xml_node<>* node, const ColorShape& fill_color,
+    class MyRectangle* parseRect(rapidxml::xml_node<>* node, const ColorShape& fill_color,
         const ColorShape& stroke_color, float stroke_width);
 
     /**
@@ -199,7 +199,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The polyline element
      */
-    class PolyLine* parsePolyline(rapidxml::xml_node<>* node,
+    class MyPolyLine* parsePolyline(rapidxml::xml_node<>* node,
         const ColorShape& fill_color,
         const ColorShape& stroke_color,
         float stroke_width);
@@ -213,7 +213,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The polygon element
      */
-    class Polygon* parsePolygon(rapidxml::xml_node<>* node,
+    class MyPolygon* parsePolygon(rapidxml::xml_node<>* node,
         const ColorShape& fill_color,
         const ColorShape& stroke_color,
         float stroke_width);
@@ -240,7 +240,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The ellipse element
      */
-    class Ellipse* parseEllipse(rapidxml::xml_node<>* node,
+    class MyEllipse* parseEllipse(rapidxml::xml_node<>* node,
         const ColorShape& fill_color,
         const ColorShape& stroke_color, float stroke_width);
 

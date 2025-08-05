@@ -4,7 +4,7 @@
 
 #include "../SVGElement.h"
 
-typedef std::vector< std::pair< std::string, std::string > >
+typedef vector< pair< string, string > >
 Attributes;  ///< Attributes of the shape
 
 /**
@@ -42,7 +42,7 @@ public:
      *
      * @return The string that represents the type of the shape.
      */
-    std::string getClass() const override;
+    string getClass() const override;
 
     /**
      * @brief Gets the attributes of the shape.
@@ -66,7 +66,7 @@ public:
      *
      * @return The vector of shapes in the composite group.
      */
-    std::vector< SVGElement* > getElements() const;
+    vector< SVGElement* > getElements() const;
 
     /**
      * @brief Prints the data of the shape.
@@ -74,9 +74,12 @@ public:
      * @note This function is used for debugging purposes.
      */
     void printData() const override;
-
+    Vector2Df getMinBound() const override;
+    Vector2Df getMaxBound() const override;
+    vector<string> getTransforms() const override;
+    SVGElement* getParent() const override;
 private:
-    std::vector< SVGElement* > shapes;  ///< Vector of shapes in the group
+    vector< SVGElement* > shapes;  ///< Vector of shapes in the group
     Attributes attributes;              ///< Attributes of the group
 };
 

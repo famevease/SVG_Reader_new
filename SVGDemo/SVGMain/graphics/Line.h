@@ -21,6 +21,12 @@ public:
 	void setDirection(const Vector2Df& direction); 
 	Vector2Df getDirection() const;
 	float getLength() const; // Trả về chiều dài
+	void printData() const override;
+    vector<string> getTransforms() const override;
+    SVGElement* getParent() const override;
+    void addElement(SVGElement* element) override;
+    Vector2Df getMinBound() const override;
+    Vector2Df getMaxBound() const override;
 };
 
 #endif

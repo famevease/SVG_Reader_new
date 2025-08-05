@@ -68,5 +68,8 @@ public:
      * @note This function is used for debugging purposes.
      */
     void printData() const override;
+    vector<string> getTransforms() const override;
+    SVGElement* getParent() const override;
+    void addElement(SVGElement* element) override;
 };
 
