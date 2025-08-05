@@ -2,7 +2,7 @@
 #include <string>       //for func utf8_to_wstring
 
 #include "DrawShape.h"
-#include "BrushUtils.h"
+
 
 // Draw a line on the given graphics context
 void DrawShape::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
