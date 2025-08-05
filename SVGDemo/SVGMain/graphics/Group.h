@@ -1,11 +1,10 @@
 #pragma once
 
+#include "../SVGElement.h"
 #include <vector>
 
-#include "../SVGElement.h"
-
 typedef vector< pair< string, string > >
-Attributes;  ///< Attributes of the shape
+Attributes;  
 
 /**
  * @brief A composite class that contains a vector of shape pointers
@@ -20,21 +19,10 @@ Attributes;  ///< Attributes of the shape
 class Group : public SVGElement
 {
 public:
-    /**
-     * @brief Constructs a Group object.
-     */
     Group();
 
-    /**
-     * @brief Constructs a Group object.
-     *
-     * @param attributes The attributes of the group.
-     */
     Group(Attributes attributes);
 
-    /**
-     * @brief Destructs a Group object.
-     */
     ~Group();
 
     /**
@@ -52,7 +40,7 @@ public:
      *
      * @return The attributes of the shape that parsed from the SVG file.
      */
-    Attributes getAttributes() const;
+    Attributes getAttributes() const; 
 
     /**
      * @brief Adds a shape to the composite group.
@@ -68,18 +56,9 @@ public:
      */
     vector< SVGElement* > getElements() const;
 
-    /**
-     * @brief Prints the data of the shape.
-     *
-     * @note This function is used for debugging purposes.
-     */
     void printData() const override;
-    Vector2Df getMinBound() const override;
-    Vector2Df getMaxBound() const override;
-    vector<string> getTransforms() const override;
-    SVGElement* getParent() const override;
 private:
-    vector< SVGElement* > shapes;  ///< Vector of shapes in the group
-    Attributes attributes;              ///< Attributes of the group
+    vector< SVGElement* > shapes;  
+    Attributes attributes;              
 };
 

@@ -32,7 +32,7 @@ public:
      *
      * @note This function is used for determining the type of the shape.
      */
-    std::string getClass() const override;
+    string getClass() const override;
 
     /**
      * @brief Sets the radius of the ellipse.
@@ -50,7 +50,6 @@ public:
 
     /**
      * @brief Gets the minimum bounding box of the shape.
-     *
      * @return The minimum bounding box of the shape.
      */
     Vector2Df getMinBound() const override;
@@ -68,8 +67,6 @@ public:
      * @note This function is used for debugging purposes.
      */
     void printData() const override;
-    vector<string> getTransforms() const override;
-    SVGElement* getParent() const override;
-    void addElement(SVGElement* element) override;
+
 };
 

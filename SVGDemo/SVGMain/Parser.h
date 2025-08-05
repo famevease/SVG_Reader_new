@@ -1,5 +1,6 @@
 #pragma once
 
+#include <objidl.h>
 #include <algorithm>
 #include <cmath>
 #include <cstring>

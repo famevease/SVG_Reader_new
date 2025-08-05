@@ -22,15 +22,6 @@ public:
      */
     Circle(float radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_width);
 
-    /**
-     * @brief Gets the type of the shape.
-     *
-     * @return The string "Circle".
-     *
-     */
     std::string getClass() const override;
-    vector<string> getTransforms() const override;
-    SVGElement* getParent() const override;
-    void addElement(SVGElement* element) override;
 };
 

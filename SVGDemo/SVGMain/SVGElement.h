@@ -215,7 +215,7 @@ protected:
 
     SVGElement* parent;  ///< Pointer to the group that contains the shape
 
-private:
+protected:
     ColorShape fill;     ///< Fill color
     ColorShape stroke;   ///< Outline color
     float stroke_width;  ///< Thickness of the shape's outline
