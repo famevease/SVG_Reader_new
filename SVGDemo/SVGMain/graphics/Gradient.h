@@ -17,8 +17,7 @@
 class Gradient {
 private:
     std::vector< Stop > stops;  ///< Stops of the gradient
-    std::pair< Vector2Df, Vector2Df >
-        points;         ///< Start and end points of the gradient
+    std::pair< Vector2Df, Vector2Df> points;         ///< Start and end points of the gradient
     std::string units;  ///< Units of the gradient
     std::vector< std::string > transforms;  ///< Transforms of the gradient
 

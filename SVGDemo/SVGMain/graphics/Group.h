@@ -1,11 +1,11 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include "../SVGElement.h"
 
-typedef vector< pair< string, string > >
-Attributes;  ///< Attributes of the shape
+typedef vector<pair<std::string,std::string>> Attributes;  ///< Attributes of the shape
 
 /**
  * @brief A composite class that contains a vector of shape pointers
@@ -66,7 +66,7 @@ public:
      *
      * @return The vector of shapes in the composite group.
      */
-    vector< SVGElement* > getElements() const;
+    vector<SVGElement*> getElements() const;
 
     /**
      * @brief Prints the data of the shape.

@@ -37,3 +37,27 @@ void MyRectangle::printData() const {
    std::cout << "Radius: " << getRadius().x << " " << getRadius().y
        << std::endl;
 }
+
+Vector2Df MyRectangle::getMinBound() const {
+	return Vector2Df(SVGElement::getPosition().x - radius.x, SVGElement::getPosition().y - radius.y);
+}
+Vector2Df MyRectangle::getMaxBound() const {
+	return Vector2Df(SVGElement::getPosition().x + width + radius.x, SVGElement::getPosition().y + height + radius.y);
+}
+vector<string> MyRectangle::getTransforms() const {	
+	return SVGElement::getTransforms();
+}
+SVGElement* MyRectangle::getParent() const {
+	return SVGElement::getParent();
+}
+void MyRectangle::addElement(SVGElement* element) {
+	// Rectangles do not support adding elements, so we can throw an exception or ignore
+	throw std::runtime_error("Cannot add elements to a Rectangle.");
+}
+// Gradient* MyRectangle::getGradient() const {
+//     return SVGElement::getGradient();
+// }
+// void MyRectangle::setGradient(Gradient* gradient) {
+//     SVGElement::setGradient(gradient);
+// }
+

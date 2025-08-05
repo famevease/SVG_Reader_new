@@ -1,4 +1,4 @@
-#include "Ellipse.h"
+#include "../graphics/Ellipse.h"
 
 MyEllipse::MyEllipse(const Vector2Df& radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_thickness): SVGElement(fill, stroke, stroke_thickness, center), radius(radius) {}
 
@@ -25,4 +25,15 @@ Vector2Df MyEllipse::getMaxBound() const {
 void MyEllipse::printData() const {
    SVGElement::printData();
    std::cout << "Radius: " << getRadius().x << " " << getRadius().y << std::endl;
+}
+vector<string> MyEllipse::getTransforms() const {
+    return SVGElement::getTransforms();
+}
+SVGElement* MyEllipse::getParent() const {
+    return parent;
+}
+void MyEllipse::addElement(SVGElement* element) {
+    if (element) {
+        element->setParent(this);
+    }
 }

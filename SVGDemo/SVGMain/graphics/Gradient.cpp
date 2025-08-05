@@ -1,4 +1,4 @@
-#include "Gradient.h"
+#include "../graphics/Gradient.h"
 Gradient::Gradient(const std::vector< Stop >& stops,
                    const std::pair< Vector2Df, Vector2Df >& points,
                    const std::string& units)

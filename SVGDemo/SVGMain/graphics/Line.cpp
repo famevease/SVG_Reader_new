@@ -1,4 +1,4 @@
-#include "Line.h"
+#include "../graphics/Line.h"
 #include <cmath>
 using namespace std;
 
@@ -20,3 +20,30 @@ Vector2Df Line::getDirection() const {
 float Line::getLength() const {
 	return sqrt(direction.x * direction.x + direction.y * direction.y);
 }
+void Line::printData() const {
+	cout << "Line: " << endl;
+	cout << "  Point 1: (" << SVGElement::getPosition().x << ", " << SVGElement::getPosition().y << ")" << endl;
+	cout << "  Point 2: (" << direction.x << ", " << direction.y << ")" << endl;
+	cout << "  Direction: (" << direction.x - SVGElement::getPosition().x << ", " << direction.y - SVGElement::getPosition().y << ")" << endl;
+	cout << "  Length: " << getLength() << endl;
+	cout << "  Fill Color: " << SVGElement::getFillColor() << endl;
+	cout << "  Outline Color: " << SVGElement::getOutlineColor() << endl;
+	cout << "  Outline Thickness: " << SVGElement::getOutlineThickness() << endl;
+
+}
+vector<string> Line::getTransforms() const {
+	return SVGElement::getTransforms();
+}
+SVGElement* Line::getParent() const {
+	return SVGElement::getParent();
+}
+void Line::addElement(SVGElement* element) {
+	SVGElement::addElement(element);
+}
+Vector2Df Line::getMinBound() const {
+	return SVGElement::getPosition();
+}
+Vector2Df Line::getMaxBound() const {
+	return Vector2Df(direction.x, direction.y);
+}
+

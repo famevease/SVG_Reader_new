@@ -29,3 +29,25 @@ void Text::printData() const {
    std::cout << "Content: " << getContent() << std::endl;
    std::cout << "Font size: " << getFontSize() << std::endl;
 }
+Vector2Df Text::getMinBound() const {
+    return Vector2Df(SVGElement::getPosition().x, SVGElement::getPosition().y - font_size);
+}
+Vector2Df Text::getMaxBound() const {
+    return Vector2Df(SVGElement::getPosition().x + content.length() * font_size / 2, SVGElement::getPosition().y + font_size);
+}
+vector<string> Text::getTransforms() const {
+    return SVGElement::getTransforms();
+}
+SVGElement* Text::getParent() const {
+    return SVGElement::getParent();
+}
+void Text::addElement(SVGElement* element) {
+    // Text elements do not support adding elements, so we can throw an exception or ignore
+    throw std::runtime_error("Cannot add elements to a Text.");
+}
+// Gradient* Text::getGradient() const {
+//     return SVGElement::getGradient();
+// }
+// void Text::setGradient(Gradient* gradient) {
+//     SVGElement::setGradient(gradient);
+// }

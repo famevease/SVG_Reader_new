@@ -220,7 +220,7 @@ private:
     ColorShape stroke;   ///< Outline color
     float stroke_width;  ///< Thickness of the shape's outline
     Vector2Df position;  ///< Position of the shape
-    vector< string > transforms;  ///< List of transformations
+    vector<string> transforms;  ///< List of transformations
     Gradient* gradient;  ///< Pointer to the gradient that contains the shape
 };
 

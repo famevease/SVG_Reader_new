@@ -12,6 +12,7 @@ class MyEllipse : public SVGElement
 {
 private:
     Vector2Df radius;  ///< Radius of the ellipse in the x and y directions
+    
 
 public:
     /**

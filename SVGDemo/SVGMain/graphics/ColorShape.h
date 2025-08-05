@@ -7,7 +7,7 @@
 #include <Windows.h>
 #include <gdiplus.h>
 #include <sstream>
-using namespace Gdiplus;
+
 
 class ColorShape
 {
@@ -24,19 +24,19 @@ public:
 
 	ColorShape();
 	ColorShape(BYTE r, BYTE g, BYTE b, BYTE a = 255);
-	ColorShape(const Color &color);
+	ColorShape(const Gdiplus::Color &color);
 
 	BYTE getR() const;
 	BYTE getG() const;
 	BYTE getB() const;
 	BYTE getA() const;
 
-	Color toGDIColor() const;
+	Gdiplus::Color toGDIColor() const;
 
 	friend std::ostream &operator<<(std::ostream &os, const ColorShape &color);
 
 private:
-	Color color;
+	Gdiplus::Color color;
 };
 /**
  * @brief A static map of named colors (CSS/SVG style names)

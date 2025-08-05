@@ -5,3 +5,19 @@ MyPolyLine::MyPolyLine(const ColorShape& fill, const ColorShape& stroke, float s
 std::string MyPolyLine::getClass() const { 
     return "Polyline"; 
 }
+vector<string> MyPolyLine::getTransforms() const {
+    return SVGElement::getTransforms();
+}
+SVGElement* MyPolyLine::getParent() const {
+    return SVGElement::getParent();
+}
+void MyPolyLine::addElement(SVGElement* element) {
+    // Polylines do not support adding elements, so we can throw an exception or ignore
+    throw std::runtime_error("Cannot add elements to a Polyline.");
+}
+// Gradient* MyPolyLine::getGradient() const {
+//     return SVGElement::getGradient();
+// }
+// void MyPolyLine::setGradient(Gradient* gradient) {
+//     SVGElement::setGradient(gradient);
+// }

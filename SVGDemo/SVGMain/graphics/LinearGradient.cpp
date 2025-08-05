@@ -1,4 +1,4 @@
-#include "LinearGradient.h"
+#include "../graphics/LinearGradient.h"
 
 LinearGradient::LinearGradient(std::vector< Stop > stops,
     std::pair< Vector2Df, Vector2Df > points,
