@@ -39,9 +39,6 @@
     <ClInclude Include="..\SVGDemo\SVGMain\Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\SVGDemo\SVGMain\SVGElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\SVGDemo\external\rapidxml\rapidxml.hpp">
       <Filter>external\rapidxml</Filter>
     </ClInclude>
@@ -120,15 +117,15 @@
     <ClInclude Include="..\SVGDemo\SVGMain\renderer\TransformUtils.h">
       <Filter>Header Files\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\SVGDemo\SVGMain\SVGElement.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SVGDemo\SVGMain\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\Parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SVGDemo\SVGMain\SVGElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\graphics\Circle.cpp">
@@ -193,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="..\SVGDemo\SVGMain\renderer\TransformUtils.cpp">
       <Filter>Source Files\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SVGDemo\SVGMain\SVGElement.cpp">
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -169,7 +169,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>D:\PROJECT\SVG_Reader_new\SVGDemo\SVGMain\sample\sample.svg</GenerateDebugInformation>
       <AdditionalDependencies>Gdiplus.lib; Ole32.lib; Ws2_32.lib;User32.lib; Gdi32.lib; Kernel32.lib; Comctl32.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
