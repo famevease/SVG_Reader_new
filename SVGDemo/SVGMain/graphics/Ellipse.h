@@ -1,6 +1,7 @@
 #pragma once
 #include "../SVGElement.h"
-
+#include <string>
+#include <vector>
 /**
  * @brief Represents an ellipse in 2D space.
  *
@@ -33,7 +34,7 @@ public:
      *
      * @note This function is used for determining the type of the shape.
      */
-    string getClass() const override;
+    std::string getClass() const override;
 
     /**
      * @brief Sets the radius of the ellipse.
@@ -68,6 +69,21 @@ public:
      * @note This function is used for debugging purposes.
      */
     void printData() const override;
+	std::vector<std::string> getTransforms() const override;
+
+    SVGElement* getParent() const override;
+    /**
+     * @brief Adds a shape to the composite group.
+     *
+     * @param element The shape to be added to the composite group.
+     */
+	void addElement(SVGElement* element) override;
+    /**
+     * @brief Gets the transformations of the shape.
+     *
+     * @return The transformations of the shape.
+     */
+	
 
 };
 

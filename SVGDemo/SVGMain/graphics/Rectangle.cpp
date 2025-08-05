@@ -44,7 +44,7 @@ Vector2Df MyRectangle::getMinBound() const {
 Vector2Df MyRectangle::getMaxBound() const {
 	return Vector2Df(SVGElement::getPosition().x + width + radius.x, SVGElement::getPosition().y + height + radius.y);
 }
-vector<string> MyRectangle::getTransforms() const {	
+std::vector<std::string> MyRectangle::getTransforms() const {	
 	return SVGElement::getTransforms();
 }
 SVGElement* MyRectangle::getParent() const {

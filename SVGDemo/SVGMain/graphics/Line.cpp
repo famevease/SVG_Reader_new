@@ -1,11 +1,11 @@
-#include "../graphics/Line.h"
+#include "Line.h"
 #include <cmath>
 using namespace std;
 
 Line::Line(const Vector2Df& point1, const Vector2Df& point2, ColorShape stroke, float stroke_width): 
 	SVGElement(ColorShape::Transparent, stroke, stroke_width, point1), direction(point2) {}
 
-string Line::getClass() const {
+std::string Line::getClass() const {
 	return "Line";
 }
 
@@ -31,7 +31,7 @@ void Line::printData() const {
 	cout << "  Outline Thickness: " << SVGElement::getOutlineThickness() << endl;
 
 }
-vector<string> Line::getTransforms() const {
+std::vector<std::string> Line::getTransforms() const {
 	return SVGElement::getTransforms();
 }
 SVGElement* Line::getParent() const {

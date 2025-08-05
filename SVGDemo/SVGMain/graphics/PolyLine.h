@@ -26,7 +26,7 @@ public:
      * @return The string "Polyline".
      */
     std::string getClass() const override;
-    vector<string> getTransforms() const override;
+    std::vector<std::string> getTransforms() const override;
     SVGElement* getParent() const override;
     void addElement(SVGElement* element) override;
 };

@@ -35,7 +35,7 @@ Vector2Df Text::getMinBound() const {
 Vector2Df Text::getMaxBound() const {
     return Vector2Df(SVGElement::getPosition().x + content.length() * font_size / 2, SVGElement::getPosition().y + font_size);
 }
-vector<string> Text::getTransforms() const {
+std::vector<std::string> Text::getTransforms() const {
     return SVGElement::getTransforms();
 }
 SVGElement* Text::getParent() const {

@@ -5,7 +5,7 @@ MyPolyLine::MyPolyLine(const ColorShape& fill, const ColorShape& stroke, float s
 std::string MyPolyLine::getClass() const { 
     return "Polyline"; 
 }
-vector<string> MyPolyLine::getTransforms() const {
+std::vector<std::string> MyPolyLine::getTransforms() const {
     return SVGElement::getTransforms();
 }
 SVGElement* MyPolyLine::getParent() const {

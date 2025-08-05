@@ -1,7 +1,12 @@
 #ifndef SVGELEMENT_H
 #define SVGELEMENT_H
 
-#include "Graphics.hpp"
+#include "../SVGMain/graphics/Vector2D.hpp"
+#include "../SVGMain/graphics/ColorShape.h"
+#include "../SVGMain/graphics/Gradient.h" 
+
+#include <string>
+#include <vector>
 /**
  * @brief Represents an element in an SVG file.
  * @note This class is abstract and cannot be instantiated.
@@ -10,7 +15,7 @@
  * @note This class is applied Composite design pattern and used as base class
  * for other shapes.
  */
-using namespace std;
+
 class SVGElement {
 public:
     /**
@@ -27,7 +32,7 @@ public:
      * @note This function is pure virtual and must be implemented by derived
      * classes.
      */
-    virtual string getClass() const = 0;
+    virtual std::string getClass() const = 0;
 
     /**
      * @brief Sets the fill color of the shape.
@@ -131,7 +136,7 @@ public:
      * @note The default transformations of the shape is empty.
      * @note The transformations can be either "translate", "rotate", "scale",
      */
-    void setTransforms(const vector< string >& transforms);
+    void setTransforms(const std::vector<std::string>& transforms);
 
     /**
      * @brief Gets the transformations of the shape.
@@ -140,7 +145,7 @@ public:
      * @note The default transformations of the shape is empty.
      * @note The transformations can be either "translate", "rotate", "scale",
      */
-    virtual vector< string > getTransforms() const = 0;
+    virtual std::vector<std::string> getTransforms() const = 0;
 
     /**
      * @brief Parent pointer setter to make the composite design pattern
@@ -220,7 +225,7 @@ protected:
     ColorShape stroke;   ///< Outline color
     float stroke_width;  ///< Thickness of the shape's outline
     Vector2Df position;  ///< Position of the shape
-    vector<string> transforms;  ///< List of transformations
+    std::vector<std::string> transforms;  ///< List of transformations
     Gradient* gradient;  ///< Pointer to the gradient that contains the shape
 };
 

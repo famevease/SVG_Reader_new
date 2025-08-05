@@ -5,12 +5,12 @@ Parser* Parser::instance = nullptr;
 
 namespace {
     // Lambda function to convert a hex color string to ColorShape
-    auto getHexColor = [](string color) -> ColorShape {
-        stringstream ss;
+    auto getHexColor = [](std::string color) -> ColorShape {
+        std::stringstream ss;
         int pos = color.find("#");
         if (color.size() < 5 || color[pos + 4] == ' ') {
             // Parse 3-digit hex color format
-            ss << hex << color.substr(pos + 1, 1) << " "
+            ss << std::hex << color.substr(pos + 1, 1) << " "
                 << color.substr(pos + 2, 1) << " " << color.substr(pos + 3, 1);
             int r, g, b;
             ss >> r >> g >> b;
@@ -21,7 +21,7 @@ namespace {
         }
         else if (color.size() < 6 || color[pos + 5] == ' ') {
             // Parse 4-digit hex color format (with alpha channel)
-            ss << hex << color.substr(pos + 1, 1) << " "
+            ss << std::hex << color.substr(pos + 1, 1) << " "
                 << color.substr(pos + 2, 1) << " " << color.substr(pos + 3, 1)
                 << color.substr(pos + 4, 1);
             int r, g, b, a;
@@ -34,14 +34,14 @@ namespace {
         }
         else {
             // Parse 6-digit hex color format (with optional alpha channel)
-            ss << hex << color.substr(pos + 1, 2) << " "
+            ss << std::hex << color.substr(pos + 1, 2) << " "
                 << color.substr(pos + 3, 2) << " " << color.substr(pos + 5, 2);
             int r, g, b;
             ss >> r >> g >> b;
             if (color[pos + 7] != '\0' && color[pos + 7] != ' ') {
                 // Parse alpha channel if present
-                stringstream ss;
-                ss << hex << color.substr(pos + 7, 2);
+                std::stringstream ss;
+                ss << std::hex << color.substr(pos + 7, 2);
                 int a;
                 ss >> a;
                 return ColorShape(r, g, b, a);
@@ -51,7 +51,7 @@ namespace {
         };
 
     // Lambda function to convert an RGB color string to ColorShape
-    auto getRgbColor = [](string color) -> ColorShape {
+    auto getRgbColor = [](std::string color) -> ColorShape {
         int r, g, b;
         float a = 1;
         sscanf_s(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
@@ -59,10 +59,10 @@ namespace {
         };
 
     // Remove extra spaces, tabs, and newlines from a string
-    string removeExtraSpaces(string input) {
+    std::string removeExtraSpaces(std::string input) {
         input.erase(remove(input.begin(), input.end(), '\t'), input.end());
         input.erase(remove(input.begin(), input.end(), '\n'), input.end());
-        string result;
+        std::string result;
         bool space_detected = false;
         bool first_space = true;
         for (int i = 0; i < input.size(); i++) {
@@ -90,7 +90,7 @@ namespace {
     }
 
     // Remove redundant consecutive spaces from a string
-    void removeRedundantSpaces(string& path_string) {
+    void removeRedundantSpaces(std::string& path_string) {
         int index = 0;
         while (index < path_string.size()) {
             if ((index == 0 || index == path_string.size() - 1) &&
@@ -108,8 +108,8 @@ namespace {
     }
 
     // Insert space before each letter in a string, except 'e'
-    void insertSpaceBeforeEachLetter(string& path_string) {
-        string result;
+    void insertSpaceBeforeEachLetter(std::string& path_string) {
+        std::string result;
         for (int index = 0; index < path_string.size(); index++) {
             if (isalpha(path_string[index]) &&
                 tolower(path_string[index]) != 'e') {
@@ -138,7 +138,7 @@ namespace {
 
     // Format SVG path string by removing extra spaces and handling
     // abbreviations
-    void formatSvgPathString(string& path_string) {
+    void formatSvgPathString(std::string& path_string) {
         replace(path_string.begin(), path_string.end(), '\t', ' ');
         replace(path_string.begin(), path_string.end(), '\n', ' ');
         insertSpaceBeforeEachLetter(path_string);
@@ -146,7 +146,7 @@ namespace {
         removeRedundantSpaces(path_string);
 
         // Check for and handle abbreviations in the SVG path string
-        auto checkAbbreviation = [](const string& s) {
+        auto checkAbbreviation = [](const std::string& s) {
             int cnt = 0;
             for (auto c : s)
                 if (c == '.') ++cnt;
@@ -154,12 +154,12 @@ namespace {
             return false;
             };
 
-        stringstream ss(path_string);
-        string element;
-        string result;
+        std::stringstream ss(path_string);
+        std::string element;
+        std::string result;
         while (ss >> element) {
-            string point_x = "";
-            string point_y = "";
+            std::string point_x = "";
+            std::string point_y = "";
             if (checkAbbreviation(element)) {
                 for (int i = (int)element.size() - 1; i >= 0; --i) {
                     if (element[i] == '.') {
@@ -178,7 +178,7 @@ namespace {
 }  // namespace
 
 // Singleton design pattern: Parser class instance creation
-Parser* Parser::getInstance(const string& file_name) {
+Parser* Parser::getInstance(const std::string& file_name) {
     if (instance == nullptr) {
         instance = new Parser(file_name);
     }
@@ -186,7 +186,7 @@ Parser* Parser::getInstance(const string& file_name) {
 }
 
 // Constructor for the Parser class
-Parser::Parser(const string& file_name) {
+Parser::Parser(const std::string& file_name) {
     root = parseElements(file_name);
 }
 
@@ -198,27 +198,27 @@ Attributes xmlToString(rapidxml::xml_attribute<>* attribute) {
     Attributes attributes;
     while (attribute) {
         attributes.push_back(
-            make_pair(attribute->name(), attribute->value()));
+            std::make_pair(attribute->name(), attribute->value()));
         attribute = attribute->next_attribute();
     }
     return attributes;
 }
 
 // Parse SVG elements from the XML document
-SVGElement* Parser::parseElements(string file_name) {
+SVGElement* Parser::parseElements(std::string file_name) {
     rapidxml::xml_document<> doc;
-    ifstream file(file_name);
-    vector< char > buffer((istreambuf_iterator< char >(file)),
-        istreambuf_iterator< char >());
+    std::ifstream file(file_name);
+    std::vector<char> buffer((std::istreambuf_iterator< char >(file)),
+        std::istreambuf_iterator< char >());
     buffer.push_back('\0');
     doc.parse< 0 >(&buffer[0]);
 
     rapidxml::xml_node<>* svg = doc.first_node();
     viewport.x = getFloatAttribute(svg, "width");
     viewport.y = getFloatAttribute(svg, "height");
-    string viewbox = getAttribute(svg, "viewBox");
+    std::string viewbox = getAttribute(svg, "viewBox");
     if (viewbox != "") {
-        stringstream ss(viewbox);
+        std::stringstream ss(viewbox);
         float x, y, w, h;
         ss >> x >> y >> w >> h;
         this->viewbox = ViewBox(x, y, w, h);
@@ -231,27 +231,27 @@ SVGElement* Parser::parseElements(string file_name) {
 
     // Parse SVG elements
     while (node) {
-        if (string(node->name()) == "defs") {
+        if (std::string(node->name()) == "defs") {
             // Parse gradients
             GetGradients(node);
             prev = node;
             node = node->next_sibling();
         }
-        else if (string(node->name()) == "g") {
+        else if (std::string(node->name()) == "g") {
             // Parse Group attributes
             Group* group = dynamic_cast<Group*>(current);
             for (auto group_attribute : group->getAttributes()) {
                 bool found = false;
                 for (auto attribute = node->first_attribute(); attribute;
                     attribute = attribute->next_attribute()) {
-                    if (string(attribute->name()) ==
+                    if (std::string(attribute->name()) ==
                         group_attribute.first) {
                         if (group_attribute.first == "opacity") {
                             // Adjust opacity if already present in the group
                             // and node
-                            string opacity = to_string(
-                                stof(attribute->value()) *
-                                stof(group_attribute.second));
+                            std::string opacity = std::to_string(
+                                std::stof(attribute->value()) *
+                                std::stof(group_attribute.second));
                             char* value = doc.allocate_string(opacity.c_str());
                             attribute->value(value);
                         }
@@ -287,12 +287,12 @@ SVGElement* Parser::parseElements(string file_name) {
                 bool found = false;
                 for (auto attribute = node->first_attribute(); attribute;
                     attribute = attribute->next_attribute()) {
-                    if (string(attribute->name()) ==
+                    if (std::string(attribute->name()) ==
                         group_attribute.first) {
                         if (group_attribute.first == "opacity") {
-                            string opacity = to_string(
-                                stof(attribute->value()) *
-                                stof(group_attribute.second));
+                            std::string opacity = std::to_string(
+                                std::stof(attribute->value()) *
+                                std::stof(group_attribute.second));
                             char* value = doc.allocate_string(opacity.c_str());
                             attribute->value(value);
                         }
@@ -337,9 +337,9 @@ SVGElement* Parser::parseElements(string file_name) {
 }
 
 // Parse and retrieve the value of the specified attribute from the XML node
-string Parser::getAttribute(rapidxml::xml_node<>* node, string name) {
+std::string Parser::getAttribute(rapidxml::xml_node<>* node, std::string name) {
     if (name == "text") return removeExtraSpaces(node->value());
-    string result;
+    std::string result;
     if (node->first_attribute(name.c_str()) == NULL) {
         if (name == "fill" || name == "stop-color")
             result = "black";
@@ -361,10 +361,10 @@ string Parser::getAttribute(rapidxml::xml_node<>* node, string name) {
 
 // Parse and retrieve the float value of the specified attribute from the XML
 // node
-float Parser::getFloatAttribute(rapidxml::xml_node<>* node, string name) {
+float Parser::getFloatAttribute(rapidxml::xml_node<>* node, std::string name) {
     float result;
     if (node->first_attribute(name.c_str()) == NULL) {
-        if (string(node->name()).find("Gradient") != string::npos) {
+        if (std::string(node->name()).find("Gradient") != std::string::npos) {
             // Handle gradient-specific attribute default values
             if (name == "x1" || name == "y1" || name == "fr")
                 result = 0;
@@ -397,12 +397,12 @@ float Parser::getFloatAttribute(rapidxml::xml_node<>* node, string name) {
     else {
         if (name == "width" || name == "height") {
             // Handle width and height attributes with percentage or point units
-            string value = node->first_attribute(name.c_str())->value();
-            if (value.find("%") != string::npos) {
+            std::string value = node->first_attribute(name.c_str())->value();
+            if (value.find("%") != std::string::npos) {
                 result = stof(value.substr(0, value.find("%"))) *
                     this->viewbox.getWidth() / 100;
             }
-            else if (value.find("pt") != string::npos) {
+            else if (value.find("pt") != std::string::npos) {
                 result = stof(value.substr(0, value.find("pt"))) * 1.33;
             }
             else {
@@ -410,26 +410,26 @@ float Parser::getFloatAttribute(rapidxml::xml_node<>* node, string name) {
             }
         }
         else
-            result = stof(node->first_attribute(name.c_str())->value());
+            result = std::stof(node->first_attribute(name.c_str())->value());
     }
     return result;
 }
 
 // Parse and convert color attribute from the XML node
-ColorShape Parser::parseColor(rapidxml::xml_node<>* node, string name,
-    string& id) {
-    string color = getAttribute(node, name);
+ColorShape Parser::parseColor(rapidxml::xml_node<>* node, std::string name,
+    std::string& id) {
+    std::string color = getAttribute(node, name);
     color.erase(remove(color.begin(), color.end(), ' '), color.end());
-    if (color.find("url") == string::npos) {
+    if (color.find("url") == std::string::npos) {
         for (auto& c : color) c = tolower(c);
     }
     if (color == "none")
         return ColorShape::Transparent;
     else {
         ColorShape result;
-        if (color.find("url") != string::npos) {
+        if (color.find("url") != std::string::npos) {
             // Handle gradient color reference
-            if (color.find("'") != string::npos) {
+            if (color.find("'") != std::string::npos) {
                 id = color.substr(color.find("'") + 1);
                 id.erase(id.find("'"));
                 id.erase(id.find("#"), 1);
@@ -440,11 +440,11 @@ ColorShape Parser::parseColor(rapidxml::xml_node<>* node, string name,
             }
             result = ColorShape::Transparent;
         }
-        else if (color.find("#") != string::npos) {
+        else if (color.find("#") != std::string::npos) {
             // Handle hex color representation
             result = getHexColor(color);
         }
-        else if (color.find("rgb") != string::npos) {
+        else if (color.find("rgb") != std::string::npos) {
             // Handle RGB color representation
             result = getRgbColor(color);
         }
@@ -452,7 +452,7 @@ ColorShape Parser::parseColor(rapidxml::xml_node<>* node, string name,
             // Handle predefined color names
             auto color_code = color_map.find(color);
             if (color_code == color_map.end()) {
-                cout << "Color " << color << " not found" << endl;
+                std::cout << "Color " << color << " not found" << std::endl;
                 exit(-1);
             }
             result = color_code->second;
@@ -469,21 +469,21 @@ ColorShape Parser::parseColor(rapidxml::xml_node<>* node, string name,
 }
 
 // Parse and return the Gradient object associated with the specified ID
-Gradient* Parser::parseGradient(string id) {
+Gradient* Parser::parseGradient(std::string id) {
     if (gradients.find(id) == gradients.end()) {
-        cout << "Gradient " << id << " not found" << endl;
+        std::cout << "Gradient " << id << " not found" << std::endl;
         exit(-1);
     }
     return gradients.at(id);
 }
 
 // Parse and return the gradient stops from the XML node
-vector< Stop > Parser::getGradientStops(rapidxml::xml_node<>* node) {
-    vector< Stop > stops;
+std::vector< Stop > Parser::getGradientStops(rapidxml::xml_node<>* node) {
+    std::vector< Stop > stops;
     rapidxml::xml_node<>* stop_node = node->first_node();
     while (stop_node) {
-        if (string(stop_node->name()) == "stop") {
-            string id = "";
+        if (std::string(stop_node->name()) == "stop") {
+            std::string id = "";
             ColorShape color = parseColor(stop_node, "stop-color", id);
             float offset = getFloatAttribute(stop_node, "offset");
             if (offset > 1) offset /= 100;
@@ -498,41 +498,41 @@ vector< Stop > Parser::getGradientStops(rapidxml::xml_node<>* node) {
 void Parser::GetGradients(rapidxml::xml_node<>* node) {
     rapidxml::xml_node<>* gradient_node = node->first_node();
     while (gradient_node) {
-        if (string(gradient_node->name()).find("Gradient") !=
-            string::npos) {
+        if (std::string(gradient_node->name()).find("Gradient") !=
+            std::string::npos) {
 
             Gradient* gradient = nullptr;
 
-            string id = getAttribute(gradient_node, "id");
-            string units = getAttribute(gradient_node, "gradientUnits");
-            vector< Stop > stops = getGradientStops(gradient_node);
-            string href = getAttribute(gradient_node, "xlink:href");
+            std::string id = getAttribute(gradient_node, "id");
+            std::string units = getAttribute(gradient_node, "gradientUnits");
+            std::vector< Stop > stops = getGradientStops(gradient_node);
+            std::string href = getAttribute(gradient_node, "xlink:href");
             
             int pos = href.find("#");
-            if (pos != string::npos) {
+            if (pos != std::string::npos) {
                 href = href.substr(pos + 1);
             }
 
-            if (string(gradient_node->name()).find("linear") !=
-                string::npos) {
+            if (std::string(gradient_node->name()).find("linear") !=
+                std::string::npos) {
                 float x1 = getFloatAttribute(gradient_node, "x1");
                 float y1 = getFloatAttribute(gradient_node, "y1");
                 float x2 = getFloatAttribute(gradient_node, "x2");
                 float y2 = getFloatAttribute(gradient_node, "y2");
-                pair< Vector2Df, Vector2Df > points = { {x1, y1}, {x2, y2} };
+                std::pair<Vector2Df, Vector2Df> points = { {x1, y1}, {x2, y2} };
                 gradient = new LinearGradient(stops, points, units);
                 if (this->gradients.find(id) == this->gradients.end())
                     this->gradients[id] = gradient;
             }
-            else if (string(gradient_node->name()).find("radial") !=
-                string::npos) {
+            else if (std::string(gradient_node->name()).find("radial") !=
+                std::string::npos) {
                 float cx = getFloatAttribute(gradient_node, "cx");
                 float cy = getFloatAttribute(gradient_node, "cy");
                 float fx = getFloatAttribute(gradient_node, "fx");
                 float fy = getFloatAttribute(gradient_node, "fy");
                 float r = getFloatAttribute(gradient_node, "r");
                 float fr = getFloatAttribute(gradient_node, "fr");
-                pair< Vector2Df, Vector2Df > points = { {cx, cy}, {fx, fy} };
+                std::pair< Vector2Df, Vector2Df > points = { {cx, cy}, {fx, fy} };
                 Vector2Df radius(r, fr);
                 gradient = new RadialGradient(stops, points, radius, units);
                 if (this->gradients.find(id) == this->gradients.end())
@@ -552,11 +552,11 @@ void Parser::GetGradients(rapidxml::xml_node<>* node) {
 }
 
 // Parse SVG elements from the XML document
-vector< Vector2Df > Parser::parsePoints(rapidxml::xml_node<>* node) {
-    vector< Vector2Df > points;
-    string points_string = getAttribute(node, "points");
+std::vector< Vector2Df > Parser::parsePoints(rapidxml::xml_node<>* node) {
+    std::vector< Vector2Df > points;
+    std::string points_string = getAttribute(node, "points");
 
-    stringstream ss(points_string);
+    std::stringstream ss(points_string);
     float x, y;
 
     while (ss >> x) {
@@ -569,16 +569,16 @@ vector< Vector2Df > Parser::parsePoints(rapidxml::xml_node<>* node) {
 }
 
 // Parse and convert path data into a vector of PathPoint
-vector< PathPoint > Parser::parsePathPoints(rapidxml::xml_node<>* node) {
-    vector< PathPoint > points;
-    string path_string = getAttribute(node, "d");
+std::vector< PathPoint > Parser::parsePathPoints(rapidxml::xml_node<>* node) {
+    std::vector< PathPoint > points;
+    std::string path_string = getAttribute(node, "d");
 
     // Pre-processing the raw path string
     formatSvgPathString(path_string);
 
     // Tokenizing the path string using stringstream
-    stringstream ss(path_string);
-    string element;
+    std::stringstream ss(path_string);
+    std::string element;
     PathPoint pPoint{ {0, 0}, 'M' };  // Default starting point and command
     while (ss >> element) {
         if (isalpha(element[0])) {
@@ -629,7 +629,7 @@ vector< PathPoint > Parser::parsePathPoints(rapidxml::xml_node<>* node) {
         points.push_back(pPoint);
     }
 
-    vector< PathPoint > handle_points;
+    std::vector< PathPoint > handle_points;
 
     // Processing and transforming raw path points
     Vector2Df first_point{ 0, 0 }, cur_point{ 0, 0 };
@@ -735,30 +735,30 @@ vector< PathPoint > Parser::parsePathPoints(rapidxml::xml_node<>* node) {
 }
 
 // Retrieve the order of transformations applied to the SVG element
-vector< string > Parser::getTransformOrder(
+std::vector< std::string > Parser::getTransformOrder(
     rapidxml::xml_node<>* node) {
-    string transform_tag;
-    if (string(node->name()).find("Gradient") != string::npos) {
+    std::string transform_tag;
+    if (std::string(node->name()).find("Gradient") != std::string::npos) {
         transform_tag = getAttribute(node, "gradientTransform");
     }
     else {
         transform_tag = getAttribute(node, "transform");
     }
 
-    vector< string > order;
-    stringstream ss(transform_tag);
-    string type;
+    std::vector< std::string > order;
+    std::stringstream ss(transform_tag);
+    std::string type;
     while (ss >> type) {
-        if (type.find("translate") != string::npos ||
-            type.find("scale") != string::npos ||
-            type.find("rotate") != string::npos ||
-            type.find("matrix") != string::npos) {
-            while (type.find(")") == string::npos) {
-                string temp;
+        if (type.find("translate") != std::string::npos ||
+            type.find("scale") != std::string::npos ||
+            type.find("rotate") != std::string::npos ||
+            type.find("matrix") != std::string::npos) {
+            while (type.find(")") == std::string::npos) {
+                std::string temp;
                 ss >> temp;
                 type += " " + temp;
             }
-            string temp = type.substr(0, type.find("(") + 1);
+            std::string temp = type.substr(0, type.find("(") + 1);
             temp.erase(remove(temp.begin(), temp.end(), ' '), temp.end());
             type.erase(0, type.find("(") + 1);
             type = temp + type;
@@ -771,8 +771,8 @@ vector< string > Parser::getTransformOrder(
 // Parse and convert SVG elements from the XML document
 SVGElement* Parser::parseShape(rapidxml::xml_node<>* node) {
     SVGElement* shape = NULL;
-    string type = node->name();
-    string id = "";
+    std::string type = node->name();
+    std::string id = "";
     ColorShape stroke_color = parseColor(node, "stroke", id);
     ColorShape fill_color = parseColor(node, "fill", id);
     float stroke_width = getFloatAttribute(node, "stroke-width");
@@ -807,9 +807,9 @@ SVGElement* Parser::parseShape(rapidxml::xml_node<>* node) {
         if (type == "text") {
             float dx = getFloatAttribute(node, "dx");
             float dy = getFloatAttribute(node, "dy");
-            string transform = "translate(" + to_string(dx) + " " +
-                to_string(dy) + ")";
-            vector< string > transform_order =
+            std::string transform = "translate(" + std::to_string(dx) + " " +
+                std::to_string(dy) + ")";
+            std::vector< std::string > transform_order =
                 getTransformOrder(node);
             transform_order.push_back(transform);
             shape->setTransforms(transform_order);
@@ -884,11 +884,11 @@ class MyPolygon* Parser::parsePolygon(rapidxml::xml_node<>* node,
     const ColorShape& stroke_color,
     float stroke_width) {
     class MyPolygon* shape = new class MyPolygon(fill_color, stroke_color, stroke_width);
-    vector< Vector2Df > points = parsePoints(node);
+    std::vector< Vector2Df > points = parsePoints(node);
     for (auto point : points) {
         shape->addPoint(point);
     }
-    string fill_rule = getAttribute(node, "fill-rule");
+    std::string fill_rule = getAttribute(node, "fill-rule");
     fill_rule.erase(remove(fill_rule.begin(), fill_rule.end(), ' '),
         fill_rule.end());
     shape->setFillRule(fill_rule);
@@ -901,11 +901,11 @@ class MyPolyLine* Parser::parsePolyline(rapidxml::xml_node<>* node,
     const ColorShape& stroke_color,
     float stroke_width) {
     class MyPolyLine* shape = new class MyPolyLine(fill_color, stroke_color, stroke_width);
-    vector< Vector2Df > points = parsePoints(node);
+    std::vector< Vector2Df > points = parsePoints(node);
     for (auto point : points) {
         shape->addPoint(point);
     }
-    string fill_rule = getAttribute(node, "fill-rule");
+    std::string fill_rule = getAttribute(node, "fill-rule");
     fill_rule.erase(remove(fill_rule.begin(), fill_rule.end(), ' '),
         fill_rule.end());
     shape->setFillRule(fill_rule);
@@ -919,18 +919,18 @@ Text* Parser::parseText(rapidxml::xml_node<>* node,
     float x = getFloatAttribute(node, "x");
     float y = getFloatAttribute(node, "y");
     float font_size = getFloatAttribute(node, "font-size");
-    string text = getAttribute(node, "text");
+    std::string text = getAttribute(node, "text");
 
     Text* shape =
         new Text(Vector2Df(x - (font_size * 6.6 / 40),
             y - font_size + (font_size * 4.4 / 40)),
             text, font_size, fill_color, stroke_color, stroke_width);
 
-    string anchor = getAttribute(node, "text-anchor");
+    std::string anchor = getAttribute(node, "text-anchor");
     anchor.erase(remove(anchor.begin(), anchor.end(), ' '), anchor.end());
     shape->setAnchor(anchor);
 
-    string style = getAttribute(node, "font-style");
+    std::string style = getAttribute(node, "font-style");
     style.erase(remove(style.begin(), style.end(), ' '), style.end());
     shape->setFontStyle(style);
 
@@ -942,11 +942,11 @@ Path* Parser::parsePath(rapidxml::xml_node<>* node,
     const ColorShape& fill_color,
     const ColorShape& stroke_color, float stroke_width) {
     Path* shape = new Path(fill_color, stroke_color, stroke_width);
-    vector< PathPoint > points = parsePathPoints(node);
+    std::vector< PathPoint > points = parsePathPoints(node);
     for (auto point : points) {
         shape->addPoint(point);
     }
-    string fill_rule = getAttribute(node, "fill-rule");
+    std::string fill_rule = getAttribute(node, "fill-rule");
     fill_rule.erase(remove(fill_rule.begin(), fill_rule.end(), ' '),
         fill_rule.end());
     shape->setFillRule(fill_rule);

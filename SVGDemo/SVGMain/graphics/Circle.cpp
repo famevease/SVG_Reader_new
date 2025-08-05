@@ -1,21 +1,22 @@
-#include "../graphics/Circle.h"
+#include "Circle.h"
 
 Circle::Circle(float radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_width): MyEllipse(Vector2Df(radius, radius), center, fill, stroke, stroke_width) {}
 
 std::string Circle::getClass() const { 
 	return "Circle"; 
-}vector<string> Circle::getTransforms() const {
-	return SVGElement::getTransforms();
 }
-
-SVGElement* Circle::getParent() const {
-	return parent;
-}
-void Circle::addElement(SVGElement* element) {
-	if (element) {
-		element->setParent(this);
-	}
-}
+//vector<string> Circle::getTransforms() const {
+//	return this->transforms;
+//}
+//
+//SVGElement* Circle::getParent() const {
+//	return parent;
+//}
+//void Circle::addElement(SVGElement* element) {
+//	if (element) {
+//		element->setParent(this);
+//	}
+//}
 //void Circle::printData() const {
 //	std::cout << "Circle: " << std::endl;
 //	std::cout << "Radius: " << getRadius().x << std::endl;

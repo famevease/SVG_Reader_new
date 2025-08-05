@@ -95,7 +95,7 @@ public:
      * @brief Prints the data of the text.
      */
     void printData() const override;
-    vector<string> getTransforms() const override;
+    std::vector<std::string> getTransforms() const override;
     SVGElement* getParent() const override;
     void addElement(SVGElement* element) override;
     Vector2Df getMinBound() const override;

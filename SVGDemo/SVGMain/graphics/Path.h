@@ -87,7 +87,7 @@ public:
     void printData() const override;
     Vector2Df getMinBound() const override;
     Vector2Df getMaxBound() const override;
-    vector<string> getTransforms() const override;
+    std::vector<std::string> getTransforms() const override;
     SVGElement* getParent() const override;
     void addElement(SVGElement* element) override;
 private:

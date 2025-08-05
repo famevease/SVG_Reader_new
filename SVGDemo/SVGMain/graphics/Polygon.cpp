@@ -5,7 +5,7 @@ MyPolygon::MyPolygon(ColorShape fill, ColorShape stroke, float stroke_width): My
 std::string MyPolygon::getClass() const { 
     return "Polygon"; 
 }
-vector<string> MyPolygon::getTransforms() const {
+std::vector<std::string> MyPolygon::getTransforms() const {
     return SVGElement::getTransforms();
 }
 SVGElement* MyPolygon::getParent() const {

@@ -43,7 +43,7 @@ Vector2Df Path::getMaxBound() const {
     }
     return Vector2Df(maxX, maxY);
 }
-vector<string> Path::getTransforms() const {
+std::vector<std::string> Path::getTransforms() const {
     return SVGElement::getTransforms();
 }
 SVGElement* Path::getParent() const {

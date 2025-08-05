@@ -1,4 +1,4 @@
-#include "../graphics/Group.h"
+#include "Group.h"
 
 Group::Group() {}
 

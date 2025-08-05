@@ -2,16 +2,10 @@
 
 #include "../SVGElement.h"
 #include <vector>
+#include <utility>
 #include <string>
 
-<<<<<<< HEAD
-#include "../SVGElement.h"
-
-typedef vector<pair<std::string,std::string>> Attributes;  ///< Attributes of the shape
-=======
-typedef vector< pair< string, string > >
-Attributes;  
->>>>>>> 5575bc718d463865c99455886c635572a698758e
+typedef std::vector<std::pair<std::string,std::string>> Attributes;  
 
 /**
  * @brief A composite class that contains a vector of shape pointers
@@ -26,18 +20,19 @@ Attributes;
 class Group : public SVGElement
 {
 public:
-    Group();
+	Group();
+
 
     Group(Attributes attributes);
 
-    ~Group();
+    ~Group() override;
 
     /**
      * @brief Gets the type of the shape.
      *
      * @return The string that represents the type of the shape.
      */
-    string getClass() const override;
+    std::string getClass() const override;
 
     /**
      * @brief Gets the attributes of the shape.
@@ -61,11 +56,16 @@ public:
      *
      * @return The vector of shapes in the composite group.
      */
-    vector<SVGElement*> getElements() const;
+    std::vector<SVGElement*> getElements() const;
 
     void printData() const override;
+	Vector2Df getMinBound() const override;
+    Vector2Df getMaxBound() const override;
+    std::vector<std::string> getTransforms() const override;
+	SVGElement* getParent() const override;
+
 private:
-    vector< SVGElement* > shapes;  
+    std::vector<SVGElement*> shapes;  
     Attributes attributes;              
 };
 
