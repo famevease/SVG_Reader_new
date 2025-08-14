@@ -110,7 +110,7 @@ void DrawShape::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
     graphics.DrawEllipse(&circle_outline,
                          circle->getPosition().x - circle->getRadius().x,
                          circle->getPosition().y - circle->getRadius().y,
-                         circle->getRadius().x * 2, circle->getRadius().x * 2);
+                         circle->getRadius().x * 2, circle->getRadius().y * 2);
 
     delete circle_fill;
 }
@@ -169,7 +169,7 @@ void DrawShape::drawPolygon(Gdiplus::Graphics& graphics, MyPolygon* polygon) con
     }
 
     // Determine the fill mode based on the polygon's fill rule
-    Gdiplus::FillMode fill_mode;
+    Gdiplus::FillMode fill_mode = Gdiplus::FillModeAlternate;
     if (polygon->getFillRule() == "evenodd") {
         fill_mode = Gdiplus::FillModeAlternate;
     } else if (polygon->getFillRule() == "nonzero") {
@@ -207,7 +207,7 @@ void DrawShape::drawPolyline(Gdiplus::Graphics& graphics,
     Gdiplus::Pen polyline_outline(outline_color.toGDIColor(), polyline->getOutlineThickness());
 
     // Determine the fill mode based on the polyline's fill rule
-    Gdiplus::FillMode fill_mode;
+    Gdiplus::FillMode fill_mode = Gdiplus::FillModeAlternate;
     if (polyline->getFillRule() == "evenodd") {
         fill_mode = Gdiplus::FillModeAlternate;
     } else if (polyline->getFillRule() == "nonzero") {
@@ -256,7 +256,7 @@ void DrawShape::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     Gdiplus::Pen path_outline(outline_color.toGDIColor(), path->getOutlineThickness());
 
     // Fill the path by rules
-    Gdiplus::FillMode fill_mode;
+    Gdiplus::FillMode fill_mode = Gdiplus::FillModeAlternate;
     if (path->getFillRule() == "evenodd") {
         fill_mode = Gdiplus::FillModeAlternate;
     } else if (path->getFillRule() == "nonzero") {
@@ -575,27 +575,43 @@ void DrawShape::draw(Gdiplus::Graphics& graphics, SVGElement* shape) const {
         return;
     }
     else if (type == "Polyline") {
-        drawPolyline(graphics, dynamic_cast<MyPolyLine*>(shape));
+        if (auto p = dynamic_cast<MyPolyLine*>(shape)) {
+            drawPolyline(graphics, p);
+        }
     }
     else if (type == "Text") {
-        drawText(graphics, dynamic_cast<Text*>(shape));
+        if (auto p = dynamic_cast<Text*>(shape)) {
+            drawText(graphics, p);
+        }
     }
     else if (type == "Rectangle") {
-        drawRectangle(graphics, dynamic_cast<MyRectangle*>(shape));
+        if (auto p = dynamic_cast<MyRectangle*>(shape)) {
+            drawRectangle(graphics, p);
+        }
     }
     else if (type == "Circle") {
-        drawCircle(graphics, dynamic_cast<Circle*>(shape));
+        if (auto p = dynamic_cast<Circle*>(shape)) {
+            drawCircle(graphics, p);
+        }
     }
     else if (type == "Ellipse") {
-        drawEllipse(graphics, dynamic_cast<MyEllipse*>(shape));
+        if (auto p = dynamic_cast<MyEllipse*>(shape)) {
+            drawEllipse(graphics, p);
+        }
     }
     else if (type == "Line") {
-        drawLine(graphics, dynamic_cast<Line*>(shape));
+        if (auto p = dynamic_cast<Line*>(shape)) {
+            drawLine(graphics, p);
+        }
     }
     else if (type == "Polygon") {
-        drawPolygon(graphics, dynamic_cast<MyPolygon*>(shape));
+        if (auto p = dynamic_cast<MyPolygon*>(shape)) {
+            drawPolygon(graphics, p);
+        }
     }
     else if (type == "Path") {
-        drawPath(graphics, dynamic_cast<Path*>(shape));
+        if (auto p = dynamic_cast<Path*>(shape)) {
+            drawPath(graphics, p);
+        }
     }
 }
