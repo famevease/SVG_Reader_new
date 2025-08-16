@@ -1,1 +1,7 @@
-﻿  svg.vcxproj -> D:\Download\SVG_Reader\svg\x64\Debug\svg.exe
+﻿  Parser.cpp
+C:\Users\chaup\source\repos\SVG_Reader_new\SVGDemo\SVGMain\Parser.cpp(24,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\chaup\source\repos\SVG_Reader_new\SVGDemo\SVGMain\Parser.cpp(116,40): warning C4244: 'argument': conversion from 'float' to 'BYTE', possible loss of data
+C:\Users\chaup\source\repos\SVG_Reader_new\SVGDemo\SVGMain\Parser.cpp(449,61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\chaup\source\repos\SVG_Reader_new\SVGDemo\SVGMain\Parser.cpp(600,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\chaup\source\repos\SVG_Reader_new\SVGDemo\SVGMain\Parser.cpp(725,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  svg.vcxproj -> C:\Users\chaup\source\repos\SVG_Reader_new\svg\x64\Debug\svg.exe

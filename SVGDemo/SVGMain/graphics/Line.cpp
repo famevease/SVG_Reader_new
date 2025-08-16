@@ -18,7 +18,7 @@ Vector2Df Line::getDirection() const {
 }
 
 float Line::getLength() const {
-	return sqrt(direction.x * direction.x + direction.y * direction.y);
+	return sqrt(pow(direction.x - getPosition().x, 2) + pow(direction.y - getPosition().y, 2));
 }
 void Line::printData() const {
 	cout << "Line: " << endl;
@@ -46,4 +46,3 @@ Vector2Df Line::getMinBound() const {
 Vector2Df Line::getMaxBound() const {
 	return Vector2Df(direction.x, direction.y);
 }
-

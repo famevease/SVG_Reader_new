@@ -14,6 +14,7 @@ Viewer::Viewer() {
     rotate_angle = 0.0f;
     offset_x = 0.0f;
     offset_y = 0.0f;
+    needs_repaint = true;
 }
 
 Viewer::~Viewer() {
@@ -33,6 +34,7 @@ void Viewer::handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
             if (wParam & MK_LBUTTON) {
                 handleMouseMove(lParam);
             }
+            break;
 
         case WM_LBUTTONDOWN:
             handleLeftButtonDown(lParam);
@@ -62,8 +64,8 @@ void Viewer::handleMouseMove(LPARAM lParam) {
         int y = static_cast< int >(HIWORD(lParam));
 
         if (x != last_mouse_pos.x || y != last_mouse_pos.y) {
-            offset_x += (x - last_mouse_pos.x) * zoom_factor;
-            offset_y += (y - last_mouse_pos.y) * zoom_factor;
+            offset_x += (x - last_mouse_pos.x) / zoom_factor;
+            offset_y += (y - last_mouse_pos.y) / zoom_factor;
             last_mouse_pos.x = x;
             last_mouse_pos.y = y;
             needs_repaint = true;
@@ -100,9 +102,9 @@ void Viewer::handleKeyDown(WPARAM wParam) {
     }
 }
 
-void Viewer::getWindowSize(HWND hWnd) const {
+void Viewer::getWindowSize(HWND hWnd) {
     RECT rect;
     GetClientRect(hWnd, &rect);
-    instance->window_size.x = static_cast< float >(rect.right - rect.left);
-    instance->window_size.y = static_cast< float >(rect.bottom - rect.top);
+    window_size.x = static_cast<float>(rect.right - rect.left);
+    window_size.y = static_cast<float>(rect.bottom - rect.top);
 }

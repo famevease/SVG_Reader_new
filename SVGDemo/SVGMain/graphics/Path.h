@@ -90,6 +90,9 @@ public:
     std::vector<std::string> getTransforms() const override;
     SVGElement* getParent() const override;
     void addElement(SVGElement* element) override;
+    Gradient* getGradient() const override;
+    void setGradient(Gradient* gradient) override;
+
 private:
     std::vector< PathPoint > points;  ///< Vector of points in the path
     std::string fill_rule;            ///< Fill rule of the path

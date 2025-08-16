@@ -4,12 +4,14 @@
 // Function to extract translation values from a transform string
 std::pair<float, float> TransformUtils::getTranslate(const std::string transform_value) {
     float trans_x = 0, trans_y = 0;
+    int count = 0;
     if (transform_value.find(",") != std::string::npos) {
-        sscanf_s(transform_value.c_str(), "translate(%f, %f)", &trans_x,
-               &trans_y);
+        count = sscanf_s(transform_value.c_str(), "translate(%f, %f)", &trans_x, &trans_y);
     } else {
-        sscanf_s(transform_value.c_str(), "translate(%f %f)", &trans_x, &trans_y);
+        count =  sscanf_s(transform_value.c_str(), "translate(%f %f)", &trans_x, &trans_y);
     }
+
+    if (count == 1) trans_y = 0;
     return std::pair< float, float >(trans_x, trans_y);
 }
 
@@ -41,19 +43,17 @@ std::pair< float, float > TransformUtils::getScaleXY(std::string transform_value
 // Apply transformations based on the specified order
 void TransformUtils::applyTransform(const std::vector<std::string> transform_order,
                                     Gdiplus::Graphics& graphics) {
-    for (auto type : transform_order) {
+    for (auto& type : transform_order) {
         if (type.find("translate") != std::string::npos) {
-            float trans_x = getTranslate(type).first,
-                  trans_y = getTranslate(type).second;
-            graphics.TranslateTransform(trans_x, trans_y);
+            auto [tx, ty] = getTranslate(type);
+            graphics.TranslateTransform(tx, ty);
         } else if (type.find("rotate") != std::string::npos) {
             float degree = getRotate(type);
             graphics.RotateTransform(degree);
         } else if (type.find("scale") != std::string::npos) {
-            if (type.find(",") != std::string::npos) {
-                float scale_x = getScaleXY(type).first,
-                      scale_y = getScaleXY(type).second;
-                graphics.ScaleTransform(scale_x, scale_y);
+            if (type.find(",") != std::string::npos || type.find(" ") != std::string::npos) {
+                auto [sx, sy] = getScaleXY(type);
+                graphics.ScaleTransform(sx, sy);
             } else {
                 float scale = getScale(type);
                 graphics.ScaleTransform(scale, scale);

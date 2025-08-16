@@ -19,6 +19,7 @@ std::string MyPolyShape::getFillRule() const {
 }
 
 Vector2Df MyPolyShape::getMinBound() const {
+    if (points.empty()) return Vector2Df(0, 0);
     float min_x = points[0].x;
     float min_y = points[0].y;
     for (auto& point : points) {
@@ -29,6 +30,7 @@ Vector2Df MyPolyShape::getMinBound() const {
 }
 
 Vector2Df MyPolyShape::getMaxBound() const {
+    if (points.empty()) return Vector2Df(0, 0);
     float max_x = points[0].x;
     float max_y = points[0].y;
     for (auto& point : points) {
@@ -44,5 +46,5 @@ void MyPolyShape::printData() const {
    for (auto& point : getPoints()) {
        std::cout << point.x << "," << point.y << " ";
    }
-   std::cout << std::endl;
+   std::cout << "\nFill Rule: " << fill_rule << std::endl;
 }

@@ -88,7 +88,14 @@ Gdiplus::Brush* BrushUtils::getBrush(SVGElement* shape,
     if (gradient != NULL) {
         std::pair< Vector2Df, Vector2Df > points = gradient->getPoints();
         std::vector< Stop > stops = gradient->getStops();
-        int stop_size = stops.size() + 2;
+        
+		//prevent crash if stop non-existent
+        if (stops.empty()) {
+            ColorShape color = shape->getFillColor();
+            return new Gdiplus::SolidBrush(color.toGDIColor());
+        }
+        
+        int stop_size = static_cast<int>(stops.size()) + 2;
         Gdiplus::Color* colors = new Gdiplus::Color[stop_size];
         float* offsets = new float[stop_size];
 
@@ -102,15 +109,15 @@ Gdiplus::Brush* BrushUtils::getBrush(SVGElement* shape,
             }
 
             // Set the center color
-            offsets[0] = 0;
-            offsets[stop_size - 1] = 1;
-            colors[0] = stops[0].getColor().toGDIColor();
-            colors[stop_size - 1] = stops[stop_size - 3].getColor().toGDIColor();
+            offsets[0] = 0.0f;
+            offsets[stop_size - 1] = 1.0f;
+            colors[0] = stops.front().getColor().toGDIColor();
+            colors[stop_size - 1] = stops.back().getColor().toGDIColor();
 
             // Reverse the order of the stops
-            for (size_t i = 1; i < stop_size - 1; ++i) {
+            for (size_t i = 1; i < static_cast<size_t>(stop_size - 1); ++i) {
                 colors[i] = stops[i - 1].getColor().toGDIColor();
-                offsets[i] = stops[i - 1].getOffset();
+                offsets[i] = std::clamp(stops[i - 1].getOffset(), 0.0f, 1.0f);
             }
 
             // Create the brush of linear gradient
@@ -148,15 +155,15 @@ Gdiplus::Brush* BrushUtils::getBrush(SVGElement* shape,
                 new Gdiplus::PathGradientBrush(&path);
 
             // Set the center color
-            offsets[0] = 0;
-            offsets[stop_size - 1] = 1;
-            colors[0] = stops[stop_size - 3].getColor().toGDIColor();
-            colors[stop_size - 1] = stops[0].getColor().toGDIColor();
+            offsets[0] = 0.0f;
+            offsets[stop_size - 1] = 1.0f;
+            colors[0] = stops.front().getColor().toGDIColor();
+            colors[stop_size - 1] = stops.back().getColor().toGDIColor();
 
-            // Reverse the order of the stops
-            for (size_t i = 1; i < stop_size - 1; ++i) {
-                colors[i] = stops[stop_size - 2 - i].getColor().toGDIColor();
-                offsets[i] = 1 - stops[stop_size - 2 - i].getOffset();
+            //// Reverse the order of the stops
+            for (size_t i = 1; i < static_cast<size_t>(stop_size - 1); ++i) {
+                colors[i] = stops[i - 1].getColor().toGDIColor();
+                offsets[i] = std::clamp(stops[i - 1].getOffset(), 0.0f, 1.0f);
             }
 
             fill->SetInterpolationColors(colors, offsets, stop_size);

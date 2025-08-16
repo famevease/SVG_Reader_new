@@ -169,7 +169,7 @@ public:
      * @param gradient The new gradient of the shape.
      * @note The default gradient of the shape is NULL.
      */
-    void setGradient(Gradient* gradient);
+    virtual void setGradient(Gradient* gradient);
 
     /**
      * @brief Gets the gradient of the shape.
@@ -177,7 +177,7 @@ public:
      * @return The gradient of the shape.
      * @note The default gradient of the shape is NULL.
      */
-    Gradient* getGradient() const;
+    virtual Gradient* getGradient() const;
 
     /**
      * @brief Adds a shape to the composite group.

@@ -57,7 +57,7 @@ public:
      *
      * @param hWnd The handle to the window.
      */
-    void getWindowSize(HWND hWnd) const;
+    void getWindowSize(HWND hWnd);
 
 private:
     static Viewer* instance;  ///< Singleton instance of the Viewer class
